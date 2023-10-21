@@ -5,38 +5,47 @@
 }
     body {
     font-family: "Poppins", sans-serif;
+    background-image: url("bck-wall-4.jpg");
+        background-size: cover;
 }
 
 .header {
-    background:#E6B17E;
+    background:#46220d;
 }
+
 .container {
     margin: auto;
     padding-left: 25px;
     padding-right: 25px;
 }
+
 .navbar {
     display: flex;
     padding: 20px;
 }
+
 nav {
     flex: 1;
     text-align: right;
     margin-top: auto;
     margin-bottom: auto;
 }
+
 nav ul {
     display: inline-block;
     list-style-type: none;
 }
+
 nav ul li {
     display: inline-block;
     margin-top: 3px;
     margin-right: 20px;
 }
-a {
+
+.navbar a {
     text-decoration: none;
     color: black;
+    font-weight: bold;
 }
 p {
     color: #555;
@@ -46,9 +55,8 @@ p {
     background-color: #69320e;
     display: inline-block;
     border: 1px solid;
-    border: black;
     border-radius: 10px;
-    padding: 3px 10px;
+    padding: 6px 13px;
     font-size: 95%;
     text-align: center;
 
@@ -60,19 +68,24 @@ p {
     justify-content: center;
     margin-top: auto;
     margin-bottom: auto;
+    height: 30px;
 }
-.search {
-    display: table;
-}
-.search input {
-    width: 120%;
-    height: 120%;
-    box-sizing: border-box;
-    border: 2px solid black;
-    border-radius: 4px;
+
+input {
+    width: auto;
+    height: 100%;
+    border: 1px solid black;
+    border-right: none;
+    border-radius: 10px;
+    background-color: black;
+    color: white;
 }
 
 .search-button {
+
+    justify-content: center;
+    margin-top: auto;
+    margin-bottom: auto;
     padding-left: 3%;
 }
 
