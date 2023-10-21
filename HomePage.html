@@ -6,11 +6,10 @@
     <meta charset="utf-8" />
     <title>Top Knihy</title>
     <link rel="stylesheet " href="HomePage.css">
-
 </head>
 <body>
 <div class="header">
-    <div class="container">
+    <div class="nav-container">
         <div class="navbar">
             <div  class="logo">
                 <img src="output-onlinepngtools.png" alt="LOGO">
@@ -37,8 +36,109 @@
         </div>
     </div>
 </div>
-<div class="main-container">
-
+<div class="slide-container">
+    <div class="slide">
+        <img src="kuciak-png.png" alt="kniha">
+    </div>
+    <div class="slide">
+        <img src="krvavy-mesiac-png.png" alt="kniha">
+    </div>
+    <div class="slide">
+        <img src="dama-kontra-strelec-png.png" alt="kniha">
+    </div>
 </div>
+<div class="container">
+    <div class="new-products-container">
+        <h2 class="new-products-title"> Najnovšie produkty</h2>
+        <div class="new-products">
+            <div class="new-product">
+                <a href="">
+                    <img src="pan-prstenov-1-spolocenstvo-prstena.jpg" alt="kniha">
+                    <h4>Pán prsteňov 1 Spoločenstvo prsteňa </h4>
+                    <p>
+                        <b>19,95€</b>
+                    </p>
+                </a>
+            </div>
+            <div class="new-product">
+                <a href="">
+                    <img src="pan-prstenov-1-spolocenstvo-prstena.jpg">
+                    <h4>Pán prsteňov 1 Spoločenstvo prsteňa </h4>
+                    <p>
+                        <b>19,95€</b>
+                    </p>
+                </a>
+            </div>
+            <div class="new-product">
+                <a href="">
+                    <img src="pan-prstenov-1-spolocenstvo-prstena.jpg">
+                    <h4>Pán prsteňov 1 Spoločenstvo prsteňa </h4>
+                    <p>
+                        <b>19,95€</b>
+                    </p>
+                </a>
+            </div>
+            <div class="new-product">
+                <a href="">
+                    <img src="pan-prstenov-1-spolocenstvo-prstena.jpg">
+                    <h4>Pán prsteňov 1 Spoločenstvo prsteňa </h4>
+                    <p>
+                        <b>19,95€</b>
+                    </p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer">
+ <div class="container">
+     <div class="informations">
+         <div class="logo-footer">
+            <a href="">
+                <img src="top-knihy-low-resolution-logo-white-transparent.png">
+            </a>
+         </div>
+         <div class="center">
+                <p>
+                    “Sú aj horšie zločiny ako pálenie kníh. Jeden z nich je nečítať ich.”
+                    ― Joseph Brodsky
+                </p>
+         </div>
+         <div class="list">
+             <h3>Informácie</h3>
+             <ul>
+                 <li><a href="">Kontakt</a></li></a>
+                 <li><a href="">Pomoc</a></li></a>
+                 <li><a href=""> podmienky</a></li>
+             </ul>
+         </div>
+         <div class="list">
+             <h3>Socíalne siete</h3>
+             <ul>
+                 <li><a href="" target="_blanc">Facebook</a></li>
+                 <li><a href ="" target="_blanc">Instagram</a></li>
+                 <li><a href="" target="_blanc">Twitter</a></li>
+             </ul>
+         </div>
+     </div>
+ </div>
+</div>
+
+<script>
+    var slideIndex = 0;
+    showSlides();
+
+    function showSlides() {
+        var i;
+        var slides = document.getElementsByClassName("slide");
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) {slideIndex = 1}
+        slides[slideIndex-1].style.display = "block";
+        setTimeout(showSlides, 5000); // Change image every 2 seconds
+    }
+</script>
 </body>
 </html>

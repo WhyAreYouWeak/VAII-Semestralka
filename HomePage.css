@@ -3,7 +3,12 @@
     padding: 0;
     box-sizing: border-box;
 }
-    body {
+a {
+    text-decoration: none;
+    color: black;
+}
+
+body {
     font-family: "Poppins", sans-serif;
     background-image: url("bck-wall-4.jpg");
         background-size: cover;
@@ -13,7 +18,7 @@
     background:#46220d;
 }
 
-.container {
+.nav-container {
     margin: auto;
     padding-left: 25px;
     padding-right: 25px;
@@ -48,7 +53,7 @@ nav ul li {
     font-weight: bold;
 }
 p {
-    color: #555;
+    color: black;
 }
 
 .search-button button {
@@ -101,4 +106,133 @@ input {
     object-fit: cover;
     display: flex;
     flex: auto;
+}
+
+.new-products-container {
+    max-width: 1080px;
+    margin: auto;
+    padding-left: 25px;
+    padding-right: 25px;
+    background-color: #46220d ;
+}
+
+.new-products-title {
+    text-align: center;
+    margin: 0 auto 20px;
+    position: relative;
+    line-height: 60px;
+    color: black;
+}
+
+.new-products-title::after {
+    content: "";
+    background: black;
+    width: 80px;
+    height: 5px;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.new-products {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.new-product {
+    flex-basis: 25%;
+    padding: 10px;
+    min-width: 200px;
+    margin-bottom: 50px;
+    text-align: center;
+    transition: margin 0.2s ease-in-out;
+}
+
+.new-product:hover {
+    transition: transform 0.5s;
+}
+
+.new-product img {
+    width: 50%;
+}
+
+.new-product p {
+    font-size: 14px;
+}
+
+.footer {
+    background: #000;
+    color: #8a8a8a;
+    font-size: 14px;
+    padding: 60px 0 20px;
+}
+
+.container {
+    max-width: 1300px;
+    margin: auto;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.slide-container {
+    flex: 1;
+    text-align: center;
+    min-width: 250px;
+}
+
+.slide img {
+    width: 1080px;
+}
+.informations {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.logo-footer {
+    flex-basis: 36%;
+    min-width: 250px;
+    margin-bottom: 20px;
+}
+
+.logo-footer img {
+    margin-left: 20px;
+    height: 30%;
+    width: 30%;
+}
+
+.center {
+    flex: 1;
+    text-align: center;
+    min-width: 250px;
+    margin-bottom: 20px;
+}
+
+ .list {
+     flex-basis: 12%;
+     text-align: center;
+     min-width: 250px;
+     margin-bottom: 20px;
+ }
+
+.footer a {
+    color: white;
+}
+
+.footer h3 {
+    color: white;
+    margin-bottom: 20px;
+}
+
+.footer ul {
+    list-style-type: none;
+}
+
+.footer p {
+    color: white;
 }
