@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8" />
     <title>Top Knihy</title>
-    <link rel="stylesheet " href="static/HomePage.css">
+    <link rel="stylesheet " href="static/css/style.css">
 </head>
 <body>
-<div class="header">
+    <div class="header">
     <div class="nav-container">
         <div class="navbar">
             <div  class="logo">
-                <img src="static/output-onlinepngtools.png" alt="LOGO">
+                <img src="static/img/output-onlinepngtools.png" alt="LOGO">
             </div>
             <div class="search-container">
                 <label>
@@ -26,23 +26,48 @@
             </div>
             <nav>
                 <ul id = "Menu">
-                    <li><a href="">Domov</a></li>
+                    <li><a href="HomePage.html">Domov</a></li>
                     <li><a href="">Kontakt</a></li>
                     <li><a href="">Ponuka</a></li>
                     <li><a href="">Novinky</a></li>
-                    <li><a href="">Prihlásenie</a></li>
+                    <li><a href="Login.html">Prihlásenie</a></li>
                 </ul>
             </nav>
         </div>
     </div>
 </div>
-
-<div class="footer">
+    <div class="container">
+        <div class="smaller-container">
+            <div class="login-register-container">
+                <div class="login-form">
+                    <form id="LoginForm" method="POST" >
+                        <ul>
+                            <li><h4>Prihlásenie</h4></li>
+                            <li><input type="text" name="l-username" placeholder="Meno"></li>
+                            <li><input type="password" name="l-password" placeholder="Heslo"></li>
+                            <li><button type="submit" required="" class="btn">Prihlásiť</button></li>
+                        </ul>
+                    </form>
+                </div>
+                <div class="register-form">
+                    <ul>
+                        <li><h4>Registrácia</h4></li>
+                        <li><input type="text" name="r-name" placeholder="Meno"></li>
+                        <li><input type="email" name="r-email" placeholder="Email"></li>
+                        <li><input type="password" name="r-password" placeholder="Heslo"></li>
+                        <li><input type="password" name="r-password-repeat" placeholder="Zopakujte heslo"></li>
+                        <li><button type="submit" class="btn">Registrovať</button></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
     <div class="container">
         <div class="informations">
             <div class="logo-footer">
                 <a href="">
-                    <img src="static/top-knihy-low-resolution-logo-white-transparent.png">
+                    <img src="static/img/top-knihy-low-resolution-logo-white-transparent.png">
                 </a>
             </div>
             <div class="center">
@@ -54,8 +79,8 @@
             <div class="list">
                 <h3>Informácie</h3>
                 <ul>
-                    <li><a href="">Kontakt</a></li></a>
-                    <li><a href="">Pomoc</a></li></a>
+                    <li><a href="">Kontakt</a></li>
+                    <li><a href="">Pomoc</a></li>
                     <li><a href=""> podmienky</a></li>
                 </ul>
             </div>
