@@ -296,3 +296,36 @@ input {
     text-align: center;
     margin-top: 3%;
 }
+
+.contact-info {
+    float: left;
+    width: 25%;
+    margin-top: 6px;
+}
+.about-container {
+    border-radius: 5px;
+    background-color:#46220d;
+    padding: 20px;
+}
+
+label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+}
+
+.row::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.text-area {
+    float: left;
+    width: 75%;
+    margin-top: 6px;
+}
+
+textarea {
+    height: 159px;
+    width: 100%;
+}

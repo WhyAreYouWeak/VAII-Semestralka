@@ -8,7 +8,7 @@
     <link rel="stylesheet " href="static/css/style.css">
 </head>
 <body>
-    <div class="header">
+<div class="header">
     <div class="nav-container">
         <div class="navbar">
             <div  class="logo">
@@ -36,33 +36,49 @@
         </div>
     </div>
 </div>
-    <div class="container">
-        <div class="smaller-container">
-            <div class="login-register-container">
-                <div class="login-form">
-                    <form id="LoginForm" method="POST" >
-                        <ul>
-                            <li><h4>Prihlásenie</h4></li>
-                            <li><input type="text" name="l-username" placeholder="Meno"></li>
-                            <li><input type="password" name="l-password" placeholder="Heslo"></li>
-                            <li><button type="submit" class="btn">Prihlásiť</button></li>
-                        </ul>
-                    </form>
-                </div>
-                <div class="register-form">
-                    <ul>
-                        <li><h4>Registrácia</h4></li>
-                        <li><input type="text" name="r-name" placeholder="Meno"></li>
-                        <li><input type="email" name="r-email" placeholder="Email"></li>
-                        <li><input type="password" name="r-password" placeholder="Heslo"></li>
-                        <li><input type="password" name="r-password-repeat" placeholder="Zopakujte heslo"></li>
-                        <li><button type="submit" class="btn">Registrovať</button></li>
-                    </ul>
-                </div>
+<div class="container">
+    <div class="about-container">
+        <p></p>
+        <h2>Kontakt na nás:</h2>
+        <br>
+        <br>
+        <strong>Telefón:</strong> +421 944 583 990
+        <p></p>
+        <br><strong>Email:</strong> motozaky@gmail.com
+        <p></p>
+        <br><strong>Adresa:</strong><br> Staničná 1584<br>Čadca 02201 <br> Slovenská republika
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="row">
+            <div class="contact-info">
+                <label for="subject">
+                    <strong>V pripade otázok nás neváhajte kontaktovať:</strong>
+                </label>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="text-area">
+                <textarea id="subject" name="subject" placeholder="" required="" style="height: 159px;"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="contact-info">
+                <label for="subject">
+                    <strong>Váš email:</strong>
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="text-area">
+                <input id="email" name="email" placeholder="" required="Váš e-mail">
             </div>
         </div>
     </div>
-    <div class="footer">
+</div>
+<div class="footer">
     <div class="container">
         <div class="informations">
             <div class="logo-footer">
