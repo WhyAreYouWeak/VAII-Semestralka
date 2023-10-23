@@ -262,7 +262,6 @@ input {
     padding: 20px 0;
     margin: auto;
     overflow: hidden;
-
 }
 
 .login-register-container form {
@@ -276,7 +275,6 @@ input {
     text-align: center;
     min-width: 250px;
     margin-bottom: 20px;
-
 }
 
 .login-form ul {
@@ -298,5 +296,4 @@ input {
     font-size: 95%;
     text-align: center;
     margin-top: 3%;
-
 }
