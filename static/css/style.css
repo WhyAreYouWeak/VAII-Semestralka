@@ -352,3 +352,15 @@ input[type="submit"] {
     cursor: pointer;
     float: right;
 }
+
+@media only screen and (max-width: 800px) {
+    nav ul {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        background: #46220d;
+        width: 100%;
+        overflow: hidden;
+        transition: max-height 0.5s;
+    }
+}

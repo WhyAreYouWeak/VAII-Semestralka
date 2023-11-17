@@ -33,6 +33,7 @@
                     <li><a href="Login.html">Prihlásenie</a></li>
                 </ul>
             </nav>
+            <img src="/img/menu.png" class="menu-icon" onclick="menutoggle()"  alt=""/>
         </div>
     </div>
 </div>
@@ -123,11 +124,9 @@
      </div>
  </div>
 </div>
-
 <script>
     var slideIndex = 0;
     showSlides();
-
     function showSlides() {
         var i;
         var slides = document.getElementsByClassName("slide");
@@ -137,7 +136,18 @@
         slideIndex++;
         if (slideIndex > slides.length) {slideIndex = 1}
         slides[slideIndex-1].style.display = "block";
-        setTimeout(showSlides, 5000); // Change image every 2 seconds
+        setTimeout(showSlides, 5000); // Change image every 2seconds
+    }
+
+    const MenuItems = document.getElementById("MenuItems");
+    MenuItems.style.maxHeight = "0px";
+    function menutoggle() {
+        if (MenuItems.style.maxHeight == "0px") {
+            MenuItems.style.maxHeight = "200px"
+        }
+        else {
+            MenuItems.style.maxHeight = "0px"
+        }
     }
 </script>
 </body>
