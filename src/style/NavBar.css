@@ -1,0 +1,17 @@
+.navbar-brand {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.nav-link {
+    color: white;
+}
+
+.navbar-toggler {
+    background-color: white;
+}
+
+.navbar-brand {
+    font-size: 30px;
+}
