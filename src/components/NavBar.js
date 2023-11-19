@@ -7,8 +7,8 @@ export default function NavBar() {
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>
-            <div className="collapse navbar-collapse" id="navbarNav">
-                <input className="form-control me-2 align-content-lg-end" type="search" placeholder="Vyhladat" aria-label="Search"/>
+            <div className="collapse navbar-collapse " id="navbarNav">
+                <input className="form-control me-2 align-content-lg-end w-25" type="search" placeholder="Vyhladat" aria-label="Search"/>
                 <button className="btn btn-outline-light" type="submit">Vyhladat</button>
                 <ul className="navbar-nav">
                     <li className="nav-item">

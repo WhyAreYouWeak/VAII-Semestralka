@@ -15,3 +15,7 @@
 .navbar-brand {
     font-size: 30px;
 }
+
+#navbarNav {
+    justify-content: flex-end !important;
+}
