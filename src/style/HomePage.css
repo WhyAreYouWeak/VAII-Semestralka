@@ -4,7 +4,26 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
 }
-.container-md {
+.container-sm {
+    background-color: #343a40;
 
+    display: flex;
+}
+h2 {
+    font-weight: bold;
+    color: white;
+}
 
+.product-tile {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.col-md-4 {
+    display: flex;
+}
+
+.container {
+    background-color: #343a40;
 }

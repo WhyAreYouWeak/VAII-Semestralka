@@ -1,6 +1,7 @@
 
 import NavBar from "./components/NavBar";
 import './style/HomePage.css';
+import ItemTile from "./components/ItemTile";
 export default function HomePage() {
   return <body>
   <NavBar></NavBar>
@@ -18,7 +19,20 @@ export default function HomePage() {
         </div>
       </div>
     </div>
-    <div> </div>
+    <div className="container-sm justify-content-center">
+      <h2>
+        Najnovšie produkty
+      </h2>
+    </div>
+    <div className="container  d-flex flex-wrap justify-content-center">
+
+      <ItemTile></ItemTile>
+      <ItemTile></ItemTile>
+      <ItemTile></ItemTile>
+      <ItemTile></ItemTile>
+      <ItemTile></ItemTile>
+      <ItemTile></ItemTile>
+    </div>
   </div>
   </body>
 }
