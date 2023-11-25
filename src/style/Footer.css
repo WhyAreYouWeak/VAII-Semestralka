@@ -1,0 +1,12 @@
+footer {
+    background-color: black;
+}
+
+.col-md-4 {
+    display: inline  !important;
+}
+
+.row {
+    --bs-gutter-x: 0;
+    padding-left: 17%;
+}

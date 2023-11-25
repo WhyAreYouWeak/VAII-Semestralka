@@ -2,6 +2,7 @@
 import NavBar from "./components/NavBar";
 import './style/HomePage.css';
 import ItemTile from "./components/ItemTile";
+import Footer from "./components/Footer";
 export default function HomePage() {
   return <body>
   <NavBar></NavBar>
@@ -31,5 +32,6 @@ export default function HomePage() {
       <ItemTile></ItemTile>
     </div>
   </div>
+  <Footer></Footer>
   </body>
 }
