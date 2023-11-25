@@ -19,15 +19,12 @@ export default function HomePage() {
         </div>
       </div>
     </div>
-    <div className="container-sm justify-content-center">
+    <div className="heading container-sm justify-content-center">
       <h2>
         Najnovšie produkty
       </h2>
     </div>
-    <div className="container  d-flex flex-wrap justify-content-center">
-
-      <ItemTile></ItemTile>
-      <ItemTile></ItemTile>
+    <div className="newProducts container  d-flex flex-wrap justify-content-center">
       <ItemTile></ItemTile>
       <ItemTile></ItemTile>
       <ItemTile></ItemTile>
