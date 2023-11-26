@@ -14,10 +14,8 @@ h2 {
     color: white;
 }
 
-.product-tile {
-    border: 1px solid #ddd;
-    padding: 15px;
-    margin-bottom: 20px;
+.productTile {
+    margin-bottom: 30px;
 }
 
 .col-md-4 {

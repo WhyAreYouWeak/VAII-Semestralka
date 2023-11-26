@@ -21,3 +21,7 @@
 #navbarNav {
     justify-content: flex-end !important;
 }
+
+a {
+    text-decoration: none;
+}

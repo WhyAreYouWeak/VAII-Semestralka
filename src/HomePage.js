@@ -1,8 +1,9 @@
-
+import React from "react";
 import NavBar from "./components/NavBar";
 import './style/HomePage.css';
 import ItemTile from "./components/ItemTile";
 import Footer from "./components/Footer";
+import {Link} from "react-router-dom";
 export default function HomePage() {
   return <body>
   <NavBar></NavBar>

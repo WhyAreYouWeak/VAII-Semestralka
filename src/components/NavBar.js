@@ -1,4 +1,5 @@
 import '../style/NavBar.css'
+import {Link} from "react-router-dom";
 export default function NavBar() {
     return <nav className="navbar navbar navbar-expand-lg lg-body-tertiary navbar-fixed-top bg-dark">
         <div className="container-fluid">
@@ -12,7 +13,7 @@ export default function NavBar() {
                 <button className="btn btn-outline-light" type="submit">Vyhľadať</button>
                 <ul className="navbar-nav">
                     <li className="nav-item">
-                        <a className="nav-link" href="#"> Domov</a>
+                       <Link to="/"> <a className="nav-link"> Domov</a>  </Link>
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" href="#"> Kontakt</a>
@@ -24,7 +25,7 @@ export default function NavBar() {
                         <a className="nav-link" href="#"> Novinky</a>
                     </li>
                     <li className="nav-item" >
-                        <a className="nav-link" href="#" > Prihlasenie</a>
+                        <Link to="/sign-register" > <a className="nav-link" > Prihlasenie</a> </Link>
                     </li>
                 </ul>
             </div>
