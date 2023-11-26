@@ -1,7 +1,9 @@
 .navbar-brand {
     color: white;
     font-weight: bold;
-    text-decoration: none;
+}
+.navbar-brand:hover {
+    color: white;
 }
 
 .nav-link {

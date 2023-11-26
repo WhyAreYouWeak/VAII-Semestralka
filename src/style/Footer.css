@@ -4,9 +4,20 @@ footer {
 
 .col-md-4 {
     display: inline  !important;
+    justify-content: center;
+    margin-left: auto;
 }
 
 .row {
     --bs-gutter-x: 0;
     padding-left: 17%;
+    background-color:  #343a40 ;
+}
+
+.col-md-4 p {
+    margin-left: 4%;
+}
+
+footer .navbar-brand {
+    padding-top: 5%;
 }
