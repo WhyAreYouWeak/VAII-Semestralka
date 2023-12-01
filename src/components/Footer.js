@@ -3,7 +3,7 @@ export default function Footer() {
     return <footer>
         <div className="row bg-dark">
             <div className="col-md-4">
-                <a className="navbar-brand" href='#'> Top knihy</a>
+                <a className="footerBrand navbar-brand" href='#'> Top knihy</a>
             </div>
             <div className="col-md-4">
                 <h4>“Sú aj horšie zločiny ako pálenie kníh. Jeden z nich je nečítať ich.”

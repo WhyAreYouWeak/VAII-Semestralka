@@ -1,0 +1,26 @@
+.col-md-6 {
+    margin-left: 15% !important;
+}
+
+label {
+    color: white;
+}
+
+.text-center {
+    color: white;
+}
+
+.btn-logIn {
+    margin-top: 5%;
+}
+
+.btn-register {
+    margin-top: 5%;
+}
+#registerForm {
+    margin-bottom: 25%;
+}
+
+#loginForm {
+    margin-top: 10%;
+}

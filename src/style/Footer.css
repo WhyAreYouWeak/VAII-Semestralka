@@ -21,3 +21,7 @@ footer {
 footer .navbar-brand {
     padding-top: 5%;
 }
+
+footer .col-md-4 {
+    margin-top: 5%;
+}
