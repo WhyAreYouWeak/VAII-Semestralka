@@ -33,6 +33,11 @@ export default function LoginRegisterPage() {
                             <label form="registerPassword">Heslo</label>
                             <input type="password" className="form-control" id="registerPassword" placeholder="Heslo" required/>
                         </div>
+
+                        <div className="form-group">
+                            <label form="registerPassword">Potvrdiť heslo</label>
+                            <input type="password" className="form-control" id="registerPassword" placeholder="Heslo" required/>
+                        </div>
                         <button type="submit" className="btn-register btn btn-success btn-block">Registrovať</button>
                     </form>
                 </div>
