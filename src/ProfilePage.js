@@ -1,7 +1,17 @@
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import "./style/ProfilePage.css";
+import validator from "validator/es";
 export default function ProfilePage() {
+    
+    const isEmailValid = (email) => {
+        console.error(email);
+        if (!validator.isEmail(email)) {
+            console.error("zly email");
+        }
+        return validator.isEmail(email);
+    };
+
    return <div>
         <body>
         <NavBar></NavBar>
