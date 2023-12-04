@@ -3,7 +3,7 @@
     border: none !important;
 }
 
-h4 {
+.card-title {
     color: white !important;
     font-weight: bold;
 }
