@@ -26,10 +26,10 @@ export default function HomePage() {
       </h2>
     </div>
     <div className="newProducts container  d-flex flex-wrap justify-content-center">
-      <ItemTile></ItemTile>
-      <ItemTile></ItemTile>
-      <ItemTile></ItemTile>
-      <ItemTile></ItemTile>
+      <ItemTile title={"Metro 2033"} price={12} imageURL={"metro2033"}></ItemTile>
+      <ItemTile title={"Metro 2033"} price={12} imageURL={"metro2033"}></ItemTile>
+      <ItemTile title={"Metro 2033"} price={12} imageURL={"metro2033"}></ItemTile>
+      <ItemTile title={"Metro 2033"} price={12} imageURL={"metro2033"}></ItemTile>
     </div>
   </div>
   <Footer></Footer>
