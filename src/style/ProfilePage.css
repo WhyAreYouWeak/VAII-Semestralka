@@ -1,0 +1,14 @@
+.card {
+    background-color: #343a40 !important;
+    border: none !important;
+}
+
+h4 {
+    color: white !important;
+    font-weight: bold;
+}
+
+.loginChangeButton , .userInformationButton {
+    margin-top: 3%;
+}
+
