@@ -1,8 +1,11 @@
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
+import ProfilePage from "./ProfilePage";
 import "./style/LoginRegisterPage.css";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import validator from "validator/es";
+import axios from "axios";
+import {redirect} from "react-router-dom";
 export default function LoginRegisterPage() {
     const [loginEmail, setLoginEmail] = useState('');
     const [loginPassword, setLoginPassword] = useState('');
@@ -10,7 +13,7 @@ export default function LoginRegisterPage() {
     const [registerEmail, setRegisterEmail] = useState('');
     const [registerPassword, setRegisterPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-
+    const [data, setData] = useState('');
     const isEmailValid = (email) => {
         console.error(email);
         if (!validator.isEmail(email)) {
@@ -23,6 +26,15 @@ export default function LoginRegisterPage() {
         event.preventDefault();
         if (isEmailValid(registerEmail) && registerPassword && confirmPassword === registerPassword) {
             console.log('Uspesna registracia');
+            const url ='http://localhost:5000/loginRegister/register';
+            axios.post(url,{email:registerEmail,password:registerPassword, confirmPassword })
+                .then(response => {
+                    redirect("/profile");
+                    console.log(response.data);
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                });
         } else {
             if (!isEmailValid(registerEmail)) {
                 alert('Zly tvar emailu.');
@@ -52,7 +64,6 @@ export default function LoginRegisterPage() {
     const handleInputChange = (e, setStateFunction) => {
         setStateFunction(e.target.value);
     };
-
 
     return <body>
     <NavBar></NavBar>

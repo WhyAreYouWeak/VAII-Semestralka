@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/js/bootstrap'
-import HomePage from './HomePage';
 import {BrowserRouter} from "react-router-dom";
 import App from './App';
 import reportWebVitals from './reportWebVitals';

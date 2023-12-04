@@ -19,7 +19,7 @@ export default function NavBar() {
                         <a className="nav-link" href="#"> Kontakt</a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#"> Ponuka</a>
+                       <Link to="/products"> <a className="nav-link" href="#"> Ponuka</a> </Link>
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" href="#"> Novinky</a>
