@@ -1,0 +1,17 @@
+.card {
+    background-color: #343a40 !important;
+    border: none !important;
+}
+
+.card-title {
+    color: white !important;
+    font-weight: bold;
+}
+
+.loginChangeButton , .userInformationButton {
+    margin-top: 3%;
+}
+
+.col-md-8 {
+    margin-left: 10% !important;
+}

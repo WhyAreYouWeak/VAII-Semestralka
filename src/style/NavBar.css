@@ -1,0 +1,27 @@
+.navbar-brand {
+    color: white;
+    font-weight: bold;
+}
+.navbar-brand:hover {
+    color: white;
+}
+
+.nav-link {
+    color: white;
+}
+
+.navbar-toggler {
+    background-color: white;
+}
+
+.navbar-brand {
+    font-size: 30px;
+}
+
+#navbarNav {
+    justify-content: flex-end !important;
+}
+
+a {
+    text-decoration: none;
+}

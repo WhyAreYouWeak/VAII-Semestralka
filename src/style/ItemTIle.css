@@ -1,0 +1,21 @@
+.productTile{
+    margin-left: auto;
+    width: 25%;
+    justify-content: center;
+}
+
+.productTile img {
+    width: 40%;
+    margin-left: auto;
+
+}
+
+h4 {
+    width: 50%;
+    color: white;
+}
+
+p {
+    width: 50%;
+    color: white;
+}

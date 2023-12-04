@@ -1,0 +1,36 @@
+
+body {
+    background-image: url('/public/background-image.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.container-sm {
+    background-color: #343a40;
+
+    display: flex;
+}
+h2 {
+    font-weight: bold;
+    color: white;
+}
+
+.productTile {
+    margin-bottom: 30px;
+}
+
+.col-md-4 {
+    display: flex;
+}
+
+.container {
+    background-color: #343a40;
+}
+
+.newProducts {
+    padding-left: 12%;
+}
+
+.heading {
+   padding-bottom: 1%;
+    padding-top: 1%;
+}
