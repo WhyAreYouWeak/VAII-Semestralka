@@ -28,7 +28,7 @@ export default function AddProduct() {
 
         try {
             // Assuming you have an API endpoint to handle product creation
-            const response = await axios.post('/api/products', product);
+            const response = await axios.post('http://localhost:5000/adminPage/addProduct', product);
 
             // Handle success or display a success message
             console.log('Product added successfully:', response.data);

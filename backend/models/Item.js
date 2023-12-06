@@ -8,7 +8,7 @@ const itemSchema = new mongoose.Schema({
         unique:true,
     },
     price: {
-        type: Number,
+        type: String,
         require: true,
     },
     ISBN: {
