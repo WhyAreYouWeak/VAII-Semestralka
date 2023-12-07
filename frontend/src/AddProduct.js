@@ -18,6 +18,8 @@ export default function AddProduct() {
         publisher: '',
         imageURL: ''
     });
+
+
     const [productId, setProductId] = useState(null);
     const navigate = useNavigate();
     useEffect(() => {

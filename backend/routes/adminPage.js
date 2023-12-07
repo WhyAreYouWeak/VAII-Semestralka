@@ -11,6 +11,7 @@ router.post('/addProduct', async function(req, res) {
             await Item.findByIdAndUpdate(product._id, product);
             res.status(200).send("Product updated successfully");
         } else {
+            const tryFindIntem = await Item.f
             const item = new Item({
                 name: product.name,
                 author: product.author,
@@ -26,8 +27,13 @@ router.post('/addProduct', async function(req, res) {
         res.status(201).send("produkt uspesne pridany");
         }
     } catch (err) {
-        console.log(err);
-        res.status(500).send('Internal Server Error while adding item');
+        if (err.code === 11000) {
+            console.error('Duplicate key error:', err.message);
+            res.status(201).send('Produkt s danym nazvom aleno ISBN uz existuje');
+        } else {
+            console.error(err);
+            res.status(500).send('Internal Server Error while adding/updating item');
+        }
     }
 });
 
