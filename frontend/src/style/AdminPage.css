@@ -4,4 +4,9 @@
 
 .addButton {
     padding-right: 14%;
+    padding-top: 1%;
+}
+
+.itemPagebutton {
+    margin-bottom: 2%;
 }

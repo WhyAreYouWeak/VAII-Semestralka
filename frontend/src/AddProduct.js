@@ -3,6 +3,8 @@ import Footer from "./components/Footer";
 import axios from 'axios';
 import {useState} from "react";
 import {useEffect} from "react";
+import  { useNavigate  }  from 'react-router-dom';
+import "./style/AdminPage.css"
 export default function AddProduct() {
 
     const [product, setProduct] = useState({
@@ -17,14 +19,13 @@ export default function AddProduct() {
         imageURL: ''
     });
     const [productId, setProductId] = useState(null);
-
+    const navigate = useNavigate();
     useEffect(() => {
-        // Check if a productId is provided in the URL
+
         const urlParams = new URLSearchParams(window.location.search);
         const id = urlParams.get("productId");
 
         if (id) {
-            // If productId is present, fetch the product details and set them as default values
             setProductId(id);
             console.log(id);
             fetchProductDetails(id);
@@ -51,16 +52,24 @@ export default function AddProduct() {
         }));
     };
 
+    const handleDelete = async () => {
+        try {
+            await axios.delete(`http://127.0.0.1:5000/adminPage/products/${productId}`);
+            alert("Produkt úspešne zmazaný");
+            navigate("/admin-page");
+        } catch (error) {
+            console.error("Error deleting product:", error);
+        }
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             if (productId) {
-                // If productId is present, update the existing product
                 await axios.put(
                     `http://127.0.0.1:5000/adminPage/products/${productId}`, product);
                 alert("Produkt upraveny uspesne");
             } else {
-                // If productId is not present, add a new product
                 const response = await axios.post(
                     "http://127.0.0.1:5000/adminPage/addProduct",product);
                 alert(response.data);
@@ -113,7 +122,8 @@ export default function AddProduct() {
                         <label htmlFor="imageURL" className="form-label">Image URL:</label>
                         <input type="text" className="form-control" id="imageURL" name="imageURL" value={product.imageURL} onChange={handleInputChange} />
                     </div>
-                    <button type="submit" className="btn btn-primary btn-block">{productId ? "Upraviť produkt" : "Pridať produkt"}</button>
+                    <button type="submit" className="itemPagebutton btn btn-primary btn-block">{productId ? "Upraviť produkt" : "Pridať produkt"}</button>
+                    {productId && (<button type="button" className="itemPagebutton btn btn-danger btn-block" onClick={handleDelete}>Zmazať produkt</button>)}
                 </form>
             </div>
         </div>

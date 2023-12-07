@@ -65,4 +65,15 @@ router.get('/products/:id', async function (req, res) {
         res.status(500).send('Internal Server Error while fetching product details');
     }
 });
+
+router.delete('/products/:id', async function(req, res) {
+    try {
+        const productId = req.params.id;
+        await Item.findByIdAndDelete(productId);
+        res.status(200).send("Product deleted successfully");
+    } catch (err) {
+        console.log(err);
+        res.status(500).send('Internal Server Error while deleting item');
+    }
+});
 module.exports = router;
