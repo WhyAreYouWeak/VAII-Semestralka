@@ -2,10 +2,12 @@ import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import axios from 'axios';
 import {useState} from "react";
+import {useEffect} from "react";
 export default function AddProduct() {
 
     const [product, setProduct] = useState({
         name: '',
+        author:'',
         price: '',
         ISBN: '',
         binding: '',
@@ -14,7 +16,33 @@ export default function AddProduct() {
         publisher: '',
         imageURL: ''
     });
+    const [productId, setProductId] = useState(null);
 
+    useEffect(() => {
+        // Check if a productId is provided in the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get("productId");
+
+        if (id) {
+            // If productId is present, fetch the product details and set them as default values
+            setProductId(id);
+            console.log(id);
+            fetchProductDetails(id);
+        }
+    }, []);
+
+    const fetchProductDetails = async (id) => {
+        try {
+            const response = await axios.get(
+                `http://127.0.0.1:5000/adminPage/products/${id}`
+            );
+
+            // Set product details as default values
+            setProduct(response.data);
+        } catch (error) {
+            console.error("Error fetching product details:", error);
+        }
+    };
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setProduct((prevProduct) => ({
@@ -25,16 +53,20 @@ export default function AddProduct() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         try {
-            // Assuming you have an API endpoint to handle product creation
-            const response = await axios.post('http://localhost:5000/adminPage/addProduct', product);
-
-            // Handle success or display a success message
-            console.log('Product added successfully:', response.data);
+            if (productId) {
+                // If productId is present, update the existing product
+                await axios.put(
+                    `http://127.0.0.1:5000/adminPage/products/${productId}`, product);
+                alert("Produkt upraveny uspesne");
+            } else {
+                // If productId is not present, add a new product
+                const response = await axios.post(
+                    "http://127.0.0.1:5000/adminPage/addProduct",product);
+                alert(response.data);
+            }
         } catch (error) {
-            // Handle error or display an error message
-            console.error('Error adding product:', error);
+            console.error("Error adding/updating product:", error);
         }
     };
 
@@ -44,10 +76,14 @@ export default function AddProduct() {
         <div className="row">
             <div className="col-md-6">
                 <form onSubmit={handleSubmit}>
-                    <h3 className="text-center mb-4">Pridať produkt</h3>
+                    <h3 className="text-center mb-4">  {productId ? "Upraviť produkt" : "Pridať produkt"}</h3>
                     <div className="mb-3">
                         <label htmlFor="name" className="form-label">Nazov:</label>
                         <input type="text" className="form-control" id="name" name="name" value={product.name} onChange={handleInputChange} required />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="name" className="form-label">Autor:</label>
+                        <input type="text" className="form-control" id="author" name="author" value={product.author} onChange={handleInputChange} required />
                     </div>
                     <div className="mb-3">
                         <label htmlFor="price" className="form-label">Cena:</label>
@@ -77,7 +113,7 @@ export default function AddProduct() {
                         <label htmlFor="imageURL" className="form-label">Image URL:</label>
                         <input type="text" className="form-control" id="imageURL" name="imageURL" value={product.imageURL} onChange={handleInputChange} />
                     </div>
-                    <button type="submit" className="btn btn-primary btn-block">Pridať produkt</button>
+                    <button type="submit" className="btn btn-primary btn-block">{productId ? "Upraviť produkt" : "Pridať produkt"}</button>
                 </form>
             </div>
         </div>

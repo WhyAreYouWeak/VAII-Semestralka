@@ -12,9 +12,9 @@ app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
 app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+    res.header("Access-Control-Allow-Origin", "http://127.0.0.1:3000");
+    res.header("Access-Control-Allow-Methods", "*");
+    res.header("Access-Control-Allow-Headers", "Content-Type");
     next();
 })
 

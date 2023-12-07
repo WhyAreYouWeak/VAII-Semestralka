@@ -24,13 +24,12 @@ export default function LoginRegisterPage() {
 
     const handleRegisterSubmit = (event) => {
         event.preventDefault();
-        if (isEmailValid(registerEmail) && registerPassword && confirmPassword === registerPassword) {
-            console.log('Uspesna registracia');
+        if (isEmailValid(registerEmail) && registerPassword) {
             const url ='http://localhost:5000/loginRegister/register';
             axios.post(url,{email:registerEmail,password:registerPassword, confirmPassword })
                 .then(response => {
                     redirect("/profile");
-                    console.log(response.data);
+                    alert(response.data);
                 })
                 .catch(error => {
                     console.error('Error fetching data:', error);

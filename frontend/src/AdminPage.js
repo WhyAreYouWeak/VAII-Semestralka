@@ -1,12 +1,24 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import ItemTile from "./components/ItemTile";
 import "./style/HomePage.css";
 import "./style/AdminPage.css";
+import Axios from "axios";
 import {Link} from "react-router-dom";
-import AddProduct from "./AddProduct";
 export default function AdminPage() {
+    const [products, setProducts] = useState([]);
+    useEffect(() => {
+        async function fetchProducts() {
+            try {
+                const response = await Axios.get("http://127.0.0.1:5000/adminPage/products"); // Adjust the API endpoint as per your server
+                setProducts(response.data);
+            } catch (error) {
+                console.error("Error fetching products:", error);
+            }
+        }
+        fetchProducts();
+    }, []);
     return (
         <body>
         <NavBar />
@@ -17,11 +29,15 @@ export default function AdminPage() {
             </div>
             </Link>
             <div className="products container d-flex flex-wrap justify-content-center">
-                <ItemTile title={"Metro 2033"} price={12} imageURL={"metro2033"}></ItemTile>
-                <ItemTile title={"Metro 2033"} price={12} imageURL={"metro2033"}></ItemTile>
-                <ItemTile title={"Metro 2033"} price={12} imageURL={"metro2033"}></ItemTile>
-                <ItemTile title={"Metro 2033"} price={12} imageURL={"metro2033"}></ItemTile>
-                <ItemTile title={"Metro 2033"} price={12} imageURL={"metro2033"}></ItemTile>
+                {products.map((product) => (
+                    <Link to={`/add-product?productId=${product._id}`} key={product._id}>
+                        <ItemTile
+                            title={product.name}
+                            price={product.price}
+                            imageURL={product.imageURL}
+                        ></ItemTile>
+                    </Link>
+                ))}
             </div>
         </div>
         <Footer />

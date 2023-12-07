@@ -7,6 +7,10 @@ const itemSchema = new mongoose.Schema({
         require: true,
         unique:true,
     },
+    author:{
+        type: String,
+        require: true,
+    },
     price: {
         type: String,
         require: true,
