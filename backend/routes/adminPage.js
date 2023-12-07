@@ -6,12 +6,10 @@ router.post('/addProduct', async function(req, res) {
     try {
         const product = req.body;
         if (product._id) {
-            res.status(200).send("Produkt sa bude updatovat");
             // If product has _id, update existing product
             await Item.findByIdAndUpdate(product._id, product);
             res.status(200).send("Product updated successfully");
         } else {
-            const tryFindIntem = await Item.f
             const item = new Item({
                 name: product.name,
                 author: product.author,
@@ -23,13 +21,13 @@ router.post('/addProduct', async function(req, res) {
                 publisher: product.publisher,
                 imageURL: product.imageURL
             });
-        await item.save();
-        res.status(201).send("produkt uspesne pridany");
+            await item.save();
+            res.status(201).send("Product successfully added");
         }
     } catch (err) {
         if (err.code === 11000) {
             console.error('Duplicate key error:', err.message);
-            res.status(201).send('Produkt s danym nazvom aleno ISBN uz existuje');
+            res.status(400).send('Product with the same name or ISBN already exists');
         } else {
             console.error(err);
             res.status(500).send('Internal Server Error while adding/updating item');
@@ -41,13 +39,12 @@ router.put('/products/:id', async function(req, res) {
     try {
         const product = req.body;
         const productID = req.params.id;
-        res.status(200).send("Produkt sa bude updatovat");
         // If product has _id, update existing product
         await Item.findByIdAndUpdate(productID, product);
         res.status(200).send("Product updated successfully");
     } catch (err) {
         console.log(err);
-        res.status(500).send('Internal Server Error while adding item');
+        res.status(500).send('Internal Server Error while updating item');
     }
 });
 
@@ -82,4 +79,5 @@ router.delete('/products/:id', async function(req, res) {
         res.status(500).send('Internal Server Error while deleting item');
     }
 });
+
 module.exports = router;

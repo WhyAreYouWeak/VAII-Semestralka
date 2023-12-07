@@ -16,7 +16,7 @@ const itemSchema = new mongoose.Schema({
         require: true,
     },
     ISBN: {
-        type: Number,
+        type: String,
         require: true,
         unique: true,
     },
@@ -24,7 +24,7 @@ const itemSchema = new mongoose.Schema({
         type: String,
     },
     weight: {
-        type: Number,
+        type: String,
     },
     language: {
         type: String,
