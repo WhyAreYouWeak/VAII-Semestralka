@@ -28,7 +28,6 @@ export default function LoginRegisterPage() {
             const url ='http://localhost:5000/loginRegister/register';
             axios.post(url,{email:registerEmail,password:registerPassword, confirmPassword })
                 .then(response => {
-                    redirect("/profile");
                     alert(response.data);
                 })
                 .catch(error => {
