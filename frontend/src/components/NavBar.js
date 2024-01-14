@@ -1,6 +1,24 @@
 import '../style/NavBar.css'
 import {Link} from "react-router-dom";
+import {useEffect, useState} from "react";
+import axios from "axios";
 export default function NavBar() {
+    const [userEmail, setUserEmail] = useState('');
+    useEffect(() => {
+        // You may need to send a request to your server to check the user's authentication status
+        // and fetch the user's email. Adjust the API endpoint accordingly.
+        const fetchUserEmail = async () => {
+            try {
+                const response = await axios.get('http://127.0.0.1:3000/getUserEmail'); // Replace with your actual API endpoint
+                setUserEmail(response.data.email);
+            } catch (error) {
+                // Handle errors
+                console.error('Error fetching user email:', error);
+            }
+        };
+
+        fetchUserEmail();
+    }, []);
     return <nav className="navbar navbar navbar-expand-lg lg-body-tertiary navbar-fixed-top bg-dark">
         <div className="container-fluid">
             <Link to="/"><a className="navbar-brand" href='#'> Top knihy</a> </Link>
@@ -25,7 +43,7 @@ export default function NavBar() {
                         <a className="nav-link" href="#"> Novinky</a>
                     </li>
                     <li className="nav-item" >
-                        <Link to="/sign-register" > <a className="nav-link" > Prihlasenie</a> </Link>
+                        <Link to="/sign-register" > <a className="nav-link" > {userEmail ? userEmail : "Prihlasenie"}</a> </Link>
                     </li>
                 </ul>
             </div>

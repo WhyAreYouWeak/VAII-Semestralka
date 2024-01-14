@@ -5,8 +5,10 @@ import "./style/LoginRegisterPage.css";
 import {useEffect, useState} from "react";
 import validator from "validator/es";
 import axios from "axios";
+import  { useNavigate  }  from 'react-router-dom';
 import {redirect} from "react-router-dom";
 export default function LoginRegisterPage() {
+    const navigate = useNavigate();
     const [loginEmail, setLoginEmail] = useState('');
     const [loginPassword, setLoginPassword] = useState('');
 
@@ -52,10 +54,12 @@ export default function LoginRegisterPage() {
                 .post(url, { email: loginEmail, password: loginPassword })
                 .then((response) => {
                     console.log("Prihlasenie uspesne", response.data);
+
                 })
                 .catch((error) => {
                     console.error("Error fetching data:", error);
                 });
+
         } else {
             if (!isEmailValid(loginEmail)) {
                 alert("Zly tvar emailu");

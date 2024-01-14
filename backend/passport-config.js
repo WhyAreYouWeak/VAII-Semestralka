@@ -1,4 +1,5 @@
 const passport = require('passport');
+const flash = require('connect-flash');
 const LocalStrategy = require('passport-local');
 const bcrypt = require('bcrypt');
 const User = require('./models/User');
@@ -36,4 +37,13 @@ passport.deserializeUser(async (id, done) => {
     }
 });
 
-module.exports = passport;
+function ensureAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    // Redirect to the login page or send an unauthorized response
+}
+module.exports = {
+    passport: passport,
+    ensureAuthenticated: ensureAuthenticated
+};
