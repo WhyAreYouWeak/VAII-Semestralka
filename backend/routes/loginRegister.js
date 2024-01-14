@@ -1,7 +1,8 @@
 const express = require('express');
 const User = require("../models/User");
 const router = express.Router();
-
+const bcrypt = require('bcrypt');
+const { hash } = bcrypt;
 
 router.post('/register', async function (req,res) {
   try {
@@ -9,7 +10,9 @@ router.post('/register', async function (req,res) {
       if (password !== confirmPassword) {
           res.status(201).send('Hesla sa nezhoduju');
       } else {
-          const user = new User({email, password});
+          const salt = await bcrypt.genSalt(10);
+          const hashedPassword  = await bcrypt.hash(password, salt);
+          const user = new User({email , password: hashedPassword});
           await user.save();
           res.status(201).send("Pouzivatel zaregistrovany");
       }
