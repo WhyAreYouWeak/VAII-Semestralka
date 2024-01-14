@@ -25,7 +25,7 @@ export default function LoginRegisterPage() {
     const handleRegisterSubmit = (event) => {
         event.preventDefault();
         if (isEmailValid(registerEmail) && registerPassword) {
-            const url ='http://localhost:5000/loginRegister/register';
+            const url ='http://127.0.0.1:5000/loginRegister/register';
             axios.post(url,{email:registerEmail,password:registerPassword, confirmPassword })
                 .then(response => {
                     alert(response.data);
@@ -44,20 +44,26 @@ export default function LoginRegisterPage() {
         }
     };
 
-
     const handleLoginSubmit = (event) => {
         event.preventDefault();
         if (isEmailValid(loginEmail) && loginPassword) {
-            console.log('Prihlasenie uspesne');
+            const url = "http://127.0.0.1:5000/loginRegister/login";
+            axios
+                .post(url, { email: loginEmail, password: loginPassword })
+                .then((response) => {
+                    console.log("Prihlasenie uspesne", response.data);
+                })
+                .catch((error) => {
+                    console.error("Error fetching data:", error);
+                });
         } else {
             if (!isEmailValid(loginEmail)) {
-                alert('Zly tvar emailu');
+                alert("Zly tvar emailu");
             } else if (!loginPassword) {
-                alert('Chyba heslo');
+                alert("Chyba heslo");
             }
         }
     };
-
 
     const handleInputChange = (e, setStateFunction) => {
         setStateFunction(e.target.value);

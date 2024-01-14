@@ -9,15 +9,15 @@ import {Link} from "react-router-dom";
 export default function AdminPage() {
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        async function fetchProducts() {
+        async function getProducts() {
             try {
-                const response = await Axios.get("http://127.0.0.1:5000/adminPage/products"); // Adjust the API endpoint as per your server
+                const response = await Axios.get("http://127.0.0.1:5000/adminPage/products");
                 setProducts(response.data);
             } catch (error) {
-                console.error("Error fetching products:", error);
+                console.error("Produkt sa nepodarilo ziskat:", error);
             }
         }
-        fetchProducts();
+        getProducts();
     }, []);
     return (
         <body>

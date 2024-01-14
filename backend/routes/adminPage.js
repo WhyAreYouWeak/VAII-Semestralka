@@ -8,7 +8,7 @@ router.post('/addProduct', async function(req, res) {
         if (product._id) {
             // If product has _id, update existing product
             await Item.findByIdAndUpdate(product._id, product);
-            res.status(200).send("Product updated successfully");
+            res.status(200).send("Produkt uspesne upraveny");
         } else {
             const item = new Item({
                 name: product.name,
@@ -22,15 +22,15 @@ router.post('/addProduct', async function(req, res) {
                 imageURL: product.imageURL
             });
             await item.save();
-            res.status(201).send("Product successfully added");
+            res.status(201).send("Produkt uspesne pridany");
         }
     } catch (err) {
         if (err.code === 11000) {
-            console.error('Duplicate key error:', err.message);
-            res.status(400).send('Product with the same name or ISBN already exists');
+            console.error('PK uz existuje:', err.message);
+            res.status(400).send('Toto ISBN uz existuje');
         } else {
             console.error(err);
-            res.status(500).send('Internal Server Error while adding/updating item');
+            res.status(500).send('Nepodarilo sa upravit/pridat');
         }
     }
 });
@@ -41,10 +41,10 @@ router.put('/products/:id', async function(req, res) {
         const productID = req.params.id;
         // If product has _id, update existing product
         await Item.findByIdAndUpdate(productID, product);
-        res.status(200).send("Product updated successfully");
+        res.status(200).send("Produkt uspesne upraveny");
     } catch (err) {
         console.log(err);
-        res.status(500).send('Internal Server Error while updating item');
+        res.status(500).send('Nepodarilo sa upravit');
     }
 });
 
@@ -54,7 +54,7 @@ router.get('/products', async function(req, res) {
         res.status(200).json(products);
     } catch (err) {
         console.error(err);
-        res.status(500).send('Internal Server Error while fetching products');
+        res.status(500).send('Nepodarilo sa nacitat produkty ');
     }
 });
 
@@ -65,7 +65,7 @@ router.get('/products/:id', async function (req, res) {
         res.status(200).json(product);
     } catch (err) {
         console.error(err);
-        res.status(500).send('Internal Server Error while fetching product details');
+        res.status(500).send('Nepodarilo sa nacitat parametre produktu');
     }
 });
 
@@ -73,10 +73,10 @@ router.delete('/products/:id', async function(req, res) {
     try {
         const productId = req.params.id;
         await Item.findByIdAndDelete(productId);
-        res.status(200).send("Product deleted successfully");
+        res.status(200).send("Produkt zmazany uspesne");
     } catch (err) {
         console.log(err);
-        res.status(500).send('Internal Server Error while deleting item');
+        res.status(500).send('Nepodarilo sa zmazat produkt');
     }
 });
 
