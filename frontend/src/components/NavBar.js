@@ -5,11 +5,9 @@ import axios from "axios";
 export default function NavBar() {
     const [userEmail, setUserEmail] = useState('');
     useEffect(() => {
-        // You may need to send a request to your server to check the user's authentication status
-        // and fetch the user's email. Adjust the API endpoint accordingly.
         const fetchUserEmail = async () => {
             try {
-                const response = await axios.get('http://127.0.0.1:3000/getUserEmail'); // Replace with your actual API endpoint
+                const response = await axios.get('http://127.0.0.1:5000/getUserEmail'); // Replace with your actual API endpoint
                 setUserEmail(response.data.email);
             } catch (error) {
                 // Handle errors

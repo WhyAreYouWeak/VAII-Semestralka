@@ -29,10 +29,18 @@ router.post('/register', async function (req,res) {
 });
 
 router.post('/login', passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/login',
-    failureFlash: true,
+    successRedirect: 'success', // Redirect to success route or page
+    failureRedirect: 'failure', // Redirect to failure route or page
+    failureFlash: true // Enable flash messages for failed login attempts
 }));
+
+router.get('/success', (req, res) => {
+    res.status(200).send('Login successful');
+});
+
+router.get('/failure', (req, res) => {
+    res.status(200).send('Login failed');
+});
 
 
 
