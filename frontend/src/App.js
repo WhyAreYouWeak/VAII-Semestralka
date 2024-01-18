@@ -5,8 +5,10 @@ import ProfilePage from "./ProfilePage";
 import ProductsPage from "./ProductsPage";
 import AdminPage from "./AdminPage";
 import AddProduct from "./AddProduct";
+import NavBar from "./components/NavBar";
 function App() {
     return (<div className="App">
+            <NavBar></NavBar>
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/sign-register" element={<LoginRegisterPage />} />

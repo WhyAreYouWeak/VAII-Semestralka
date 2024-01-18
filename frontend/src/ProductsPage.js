@@ -3,7 +3,6 @@ import Footer from "./components/Footer";
 
 export default function ProductsPage() {
     return <body>
-        <NavBar></NavBar>
 
         <Footer></Footer>
     </body>

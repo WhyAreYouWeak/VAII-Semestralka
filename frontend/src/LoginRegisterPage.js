@@ -6,7 +6,6 @@ import {useEffect, useState} from "react";
 import validator from "validator/es";
 import axios from "axios";
 import  { useNavigate  }  from 'react-router-dom';
-import {redirect} from "react-router-dom";
 export default function LoginRegisterPage() {
     const navigate = useNavigate();
     const [loginEmail, setLoginEmail] = useState('');
@@ -28,7 +27,7 @@ export default function LoginRegisterPage() {
         event.preventDefault();
         if (isEmailValid(registerEmail) && registerPassword) {
             const url ='http://127.0.0.1:5000/loginRegister/register';
-            axios.post(url,{email:registerEmail,password:registerPassword, confirmPassword })
+            axios.post(url,{email:registerEmail,password:registerPassword, confirmPassword },{withCredentials:true})
                 .then(response => {
                     alert(response.data);
                 })
@@ -51,10 +50,10 @@ export default function LoginRegisterPage() {
         if (isEmailValid(loginEmail) && loginPassword) {
             const url = "http://127.0.0.1:5000/loginRegister/login";
             axios
-                .post(url, { email: loginEmail, password: loginPassword })
+                .post(url, { email: loginEmail, password: loginPassword },{withCredentials:true})
                 .then((response) => {
                     console.log("Prihlasenie uspesne", response.data);
-
+                    window.location.reload();
                 })
                 .catch((error) => {
                     console.error("Error fetching data:", error);
@@ -74,7 +73,6 @@ export default function LoginRegisterPage() {
     };
 
     return <body>
-    <NavBar></NavBar>
     <div className="container-md">
             <div className="row">
                 <div className="col-md-6 ">

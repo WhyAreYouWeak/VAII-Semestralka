@@ -21,7 +21,7 @@ export default function AdminPage() {
     }, []);
     return (
         <body>
-        <NavBar />
+
         <div className="container-md position-relative">
             <Link to="/add-product">
             <div className="addButton position-absolute top-0 end-0">

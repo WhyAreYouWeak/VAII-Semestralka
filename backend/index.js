@@ -19,31 +19,27 @@ app.listen(port, () => {
 
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "http://127.0.0.1:3000");
+    res.header("Access-Control-Allow-Credentials", "true");
     res.header("Access-Control-Allow-Methods", "*");
     res.header("Access-Control-Allow-Headers", "Content-Type");
     next();
 })
 
 app.use(session({
-    secret: process.env.SESSION_SECRET || 'default-secret',
+    secret: 'default-secret',
     resave: false,
     saveUninitialized: false,
 }));
 
-app.use(passport.initialize());
-app.use(passport.session());
 app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session(undefined));
 
-app.get('/getUserEmail', (req, res) => {
-    console.log("123");
-    console.log(req.user);
-    if (req.isAuthenticated()) {
-        console.log("Je autentifikovany");
-        res.json({ email: req.user.email });
-    } else {
-        console.log("nie je autentifikovany");
-        res.json({});
-    }
+
+
+app.get('/getUserEmail', ensureAuthenticated ,(req, res) => {
+   console.log("Je autentifikovany" + req.user);
+   res.json({ email: req.user.email });
 });
 
 const loginRegisterRouter = require('./routes/loginRegister');
@@ -54,7 +50,7 @@ app.use('/adminPage', adminPage);
 
 
 app.get('/', (req, res) => {
-
+    console.log(req.isAuthenticated());
 })
 
 app.get('/test-auth', (req, res) => {

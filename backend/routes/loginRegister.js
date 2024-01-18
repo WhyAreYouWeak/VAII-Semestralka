@@ -17,7 +17,6 @@ router.post('/register', async function (req,res) {
           await user.save();
           res.status(201).send("Pouzivatel zaregistrovany");
       }
-
   } catch (err) {
       if (err.code === 11000 && err.keyPattern && err.keyPattern.email) {
           res.status(201).send('Email uz existuje');
@@ -28,20 +27,45 @@ router.post('/register', async function (req,res) {
   }
 });
 
-router.post('/login', passport.authenticate('local', {
-    successRedirect: 'success', // Redirect to success route or page
-    failureRedirect: 'failure', // Redirect to failure route or page
-    failureFlash: true // Enable flash messages for failed login attempts
-}));
+router.post('/login', (req, res, next) => {
+    passport.authenticate("local", async (err, user, info ) => {
+        if (err)
+            return next(err);
+        else if (!user)
+            return res.status(400).send([ info.message ]);
+
+        req.logIn(user, (err) => {
+            if (err)
+                return next(err);
+
+            return res.status(200).json({
+                id: user.id,
+                email: user.email,
+            });
+        });
+    })(req, res, next);
+});
+
+router.post('/logout', (req, res, next) => {
+    console.log(" LOGOUT " + req.user);
+   req.logout((error) => {
+       if (error) {
+           return res.status(400).send(error)
+       } else {
+           return res.status(200).send("Logout success.");
+       }
+
+   });
+});
 
 router.get('/success', (req, res) => {
-    res.status(200).send('Login successful');
+
+
+    res.status(200).send('Login successful: ' + req.body.user );
 });
 
 router.get('/failure', (req, res) => {
     res.status(200).send('Login failed');
 });
-
-
 
 module.exports = router;

@@ -14,7 +14,6 @@ export default function ProfilePage() {
 
    return <div>
         <body>
-        <NavBar></NavBar>
         <div className="container">
             <div className="row">
                 <div className="col-md-8">

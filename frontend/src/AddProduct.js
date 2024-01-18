@@ -82,7 +82,7 @@ export default function AddProduct() {
     };
 
     return <body>
-    <NavBar />
+
     <div className="container-md">
         <div className="row">
             <div className="col-md-6">

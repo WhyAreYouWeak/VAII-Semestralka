@@ -5,7 +5,7 @@ import ItemTile from "./components/ItemTile";
 import Footer from "./components/Footer";
 export default function HomePage() {
   return <body>
-  <NavBar></NavBar>
+
   <div className="container-md">
     <div id="carouselExampleSlidesOnly" className="carousel slide" data-bs-ride="carousel">
       <div className="carousel-inner">

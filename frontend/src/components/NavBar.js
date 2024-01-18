@@ -3,11 +3,14 @@ import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
 import axios from "axios";
 export default function NavBar() {
+    const Logout = () => {
+        axios.post('http://127.0.0.1:5000/loginRegister/logout',{},{withCredentials:true}).then(r => window.location.reload()).catch();
+    };
     const [userEmail, setUserEmail] = useState('');
     useEffect(() => {
         const fetchUserEmail = async () => {
             try {
-                const response = await axios.get('http://127.0.0.1:5000/getUserEmail'); // Replace with your actual API endpoint
+                const response = await axios.get('http://127.0.0.1:5000/getUserEmail',{withCredentials:true}); // Replace with your actual API endpoint
                 setUserEmail(response.data.email);
             } catch (error) {
                 // Handle errors
@@ -43,6 +46,11 @@ export default function NavBar() {
                     <li className="nav-item" >
                         <Link to="/sign-register" > <a className="nav-link" > {userEmail ? userEmail : "Prihlasenie"}</a> </Link>
                     </li>
+                    {userEmail &&
+                    <li className="nav-item">
+                        <button type="submit" onClick={Logout}> Logout </button>
+                    </li>
+                    }
                 </ul>
             </div>
         </div>
