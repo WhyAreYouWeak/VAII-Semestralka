@@ -9,6 +9,7 @@ export default function AddProduct() {
         name: '',
         author:'',
         price: '',
+        category: '',
         ISBN: '',
         binding: '',
         weight: '',
@@ -81,6 +82,7 @@ export default function AddProduct() {
             formData.append('name', product.name);
             formData.append('author', product.author);
             formData.append('price', product.price);
+            formData.append('category',product.category);
             formData.append('ISBN', product.ISBN);
             formData.append('binding', product.binding);
             formData.append('weight', product.weight);
@@ -129,6 +131,10 @@ export default function AddProduct() {
                     <div className="mb-3">
                         <label htmlFor="price" className="form-label">Cena:</label>
                         <input type="text" className="form-control" id="price" name="price" value={product.price} onChange={handleInputChange} required />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="price" className="form-label">Kategória:</label>
+                        <input type="text" className="form-control" id="category" name="category" value={product.category} onChange={handleInputChange} required />
                     </div>
                     <div className="mb-3">
                         <label htmlFor="ISBN" className="form-label">ISBN:</label>
