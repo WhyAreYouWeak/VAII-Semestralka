@@ -4,8 +4,7 @@ import React, {useEffect, useState} from "react";
 import Axios from "axios";
 import "./style/HomePage.css";
 import "./style/AdminPage.css";
-import {data} from "express-session/session/cookie";
-
+import "./style/ProductsPage.css"
 export default function ProductsPage() {
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
@@ -18,13 +17,24 @@ export default function ProductsPage() {
                 console.log(categoriesResponse.data);
                 setCategories(categoriesResponse.data);
             } catch (error) {
-                console.error("Produkt sa nepodarilo ziskat:", error);
+                console.error("Data sa nepodarilo ziskat:", error);
             }
         }
         getData();
     }, []);
     return <body>
+
     <div className="container-md position-relative">
+        <div className="left-menu">
+            <h3>Kategórie</h3>
+            <ul>
+                {categories.map((category) => (
+                    <li key={category._id}>
+                        <Link to={`/category/${category._id}`}>{category.name}</Link>
+                    </li>
+                ))}
+            </ul>
+        </div>
         <div className="products container d-flex flex-wrap justify-content-center">
             {products.map((product) => (
                 <Link to={`/add-product?productId=${product._id}`} key={product._id}>

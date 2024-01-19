@@ -1,12 +1,32 @@
 const express = require('express');
 const router = express.Router();
 const Item = require("../models/Item");
+const path = require('path');
 
-router.post('/addProduct', async function(req, res) {
+const multer = require('multer');
+
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, "../frontend/public/books");
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname));
+    },
+});
+
+const upload = multer({ storage: storage });
+router.post('/addProduct', upload.single('imageFile') ,async function(req, res) {
     try {
         const product = req.body;
+        const imageFile = req.file;
+        console.log("meno suboru je "  + req.file.filename);
+        console.log("id produktu je " + product._id);
+        if (imageFile) {
+            product.imageURL = `books/${imageFile.filename}`;
+        }
+
         if (product._id) {
-            // If product has _id, update existing product
             await Item.findByIdAndUpdate(product._id, product);
             res.status(200).send("Produkt uspesne upraveny");
         } else {
@@ -34,19 +54,38 @@ router.post('/addProduct', async function(req, res) {
         }
     }
 });
-
-router.put('/products/:id', async function(req, res) {
+router.post('/products/:id', upload.single('imageFile'), async function(req, res) {
     try {
-        const product = req.body;
         const productID = req.params.id;
-        // If product has _id, update existing product
-        await Item.findByIdAndUpdate(productID, product);
+        const updatedProductInfo = req.body;
+        console.log(updatedProductInfo);
+
+        // Check if the product has an image file
+        if (req.file) {
+            const imageFile = req.file;
+            updatedProductInfo.imageURL = `books/${imageFile.filename}`;
+        }
+        // Update existing product information (excluding image file)
+        await Item.findByIdAndUpdate(productID, {
+            $set: {
+                name: updatedProductInfo.name,
+                author: updatedProductInfo.author,
+                price: updatedProductInfo.price,
+                ISBN: updatedProductInfo.ISBN,
+                binding: updatedProductInfo.binding,
+                weight: updatedProductInfo.weight,
+                language: updatedProductInfo.language,
+                publisher: updatedProductInfo.publisher,
+                imageURL: updatedProductInfo.imageURL,
+            }
+        });
         res.status(200).send("Produkt uspesne upraveny");
     } catch (err) {
         console.log(err);
         res.status(500).send('Nepodarilo sa upravit');
     }
 });
+
 
 router.get('/products', async function(req, res) {
     try {

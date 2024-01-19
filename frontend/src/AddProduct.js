@@ -14,7 +14,8 @@ export default function AddProduct() {
         weight: '',
         language: '',
         publisher: '',
-        imageURL: ''
+        imageFile: null,
+
     });
 
 
@@ -50,6 +51,16 @@ export default function AddProduct() {
         }));
     };
 
+    const handleFileChange = (e) => {
+        if (e.target.files && e.target.files.length > 0) {
+            const selectedFile = e.target.files[0];
+            setProduct((prevProduct) => ({
+                ...prevProduct,
+                imageFile: selectedFile,
+            }));
+        }
+    };
+
     const handleDelete = async () => {
         try {
             await axios.delete(`http://127.0.0.1:5000/adminPage/products/${productId}`);
@@ -62,14 +73,37 @@ export default function AddProduct() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
         try {
+
+            const formData = new FormData();
+
+            formData.append('name', product.name);
+            formData.append('author', product.author);
+            formData.append('price', product.price);
+            formData.append('ISBN', product.ISBN);
+            formData.append('binding', product.binding);
+            formData.append('weight', product.weight);
+            formData.append('language', product.language);
+            formData.append('publisher', product.publisher);
+            formData.append('imageFile', product.imageFile);
+            const config = {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                }
+            };
+
             if (productId) {
-                await axios.put(
-                    `http://127.0.0.1:5000/adminPage/products/${productId}`, product);
-                alert("Produkt upraveny uspesne");
+                console.log(productId);
+                console.log(formData);
+                await axios.post(`http://127.0.0.1:5000/adminPage/products/${productId}`,  formData , config);
+                alert("Produkt úspešne upravený");
             } else {
                 const response = await axios.post(
-                    "http://127.0.0.1:5000/adminPage/addProduct",product);
+                    "http://127.0.0.1:5000/adminPage/addProduct",
+                    formData,
+                    { headers: { 'Content-Type': 'multipart/form-data' } }
+                );
                 alert(response.data);
             }
         } catch (error) {
@@ -117,8 +151,8 @@ export default function AddProduct() {
                         <input type="text" className="form-control" id="publisher" name="publisher" value={product.publisher} onChange={handleInputChange} required />
                     </div>
                     <div className="mb-3">
-                        <label htmlFor="imageURL" className="form-label">Image URL:</label>
-                        <input type="text" className="form-control" id="imageURL" name="imageURL" value={product.imageURL} onChange={handleInputChange} />
+                        <label htmlFor="imageURL" className="form-label">Obrazok:</label>
+                        <input type="file" className="form-control" id="image" name="image" onChange={handleFileChange} />
                     </div>
                     <button type="submit" className="itemPagebutton btn btn-primary btn-block">{productId ? "Upraviť produkt" : "Pridať produkt"}</button>
                     {productId && (<button type="button" className="itemPagebutton btn btn-danger btn-block" onClick={handleDelete}>Zmazať produkt</button>)}

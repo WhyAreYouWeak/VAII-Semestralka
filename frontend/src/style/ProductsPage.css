@@ -1,0 +1,35 @@
+.left-menu {
+    width: 200px;
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+}
+
+.left-menu h3 {
+    margin-bottom: 15px;
+    font-size: 18px;
+    color: #495057;
+}
+
+.left-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.left-menu li {
+    margin-bottom: 8px;
+}
+
+.left-menu a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.left-menu a:hover {
+    color: #0056b3;
+}
