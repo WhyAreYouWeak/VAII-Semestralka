@@ -6,6 +6,7 @@ import ProductsPage from "./ProductsPage";
 import AdminPage from "./AdminPage";
 import AddProduct from "./AddProduct";
 import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
 function App() {
     return (<div className="App">
             <NavBar></NavBar>
@@ -17,6 +18,7 @@ function App() {
                 <Route path="/admin-page" element={<AdminPage></AdminPage>}></Route>
                 <Route path="/add-product" element={<AddProduct></AddProduct>}></Route>
             </Routes>
+        <Footer></Footer>
     </div> );
 }
 export default App;

@@ -15,8 +15,6 @@ app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
 
-
-
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "http://127.0.0.1:3000");
     res.header("Access-Control-Allow-Credentials", "true");
@@ -42,21 +40,16 @@ app.get('/getUserEmail', ensureAuthenticated ,(req, res) => {
    res.json({ email: req.user.email });
 });
 
-const loginRegisterRouter = require('./routes/loginRegister');
+const loginRegister = require('./routes/loginRegister');
 const adminPage = require('./routes/adminPage');
-
-app.use('/loginRegister',loginRegisterRouter);
+const productsPage = require('./routes/productsPage');
+app.use('/loginRegister',loginRegister);
 app.use('/adminPage', adminPage);
-
+app.use('/products', productsPage);
 
 app.get('/', (req, res) => {
     console.log(req.isAuthenticated());
 })
-
-app.get('/test-auth', (req, res) => {
-    console.log("Je hehe");
-    res.send('Authenticated!');
-});
 
 mongoose.connect("mongodb+srv://Daniel:zvhfdPFNilcOzVjf@cluster0.qaxplfa.mongodb.net/?retryWrites=true&w=majority")
     .then(() => console.log("Database connected"))

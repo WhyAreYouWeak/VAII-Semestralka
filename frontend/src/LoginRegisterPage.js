@@ -1,6 +1,3 @@
-import NavBar from "./components/NavBar";
-import Footer from "./components/Footer";
-import ProfilePage from "./ProfilePage";
 import "./style/LoginRegisterPage.css";
 import {useEffect, useState} from "react";
 import validator from "validator/es";
@@ -111,6 +108,5 @@ export default function LoginRegisterPage() {
                 </div>
             </div>
     </div>
-    <Footer></Footer>
     </body>
 }

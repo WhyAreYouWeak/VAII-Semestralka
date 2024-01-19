@@ -1,5 +1,3 @@
-import NavBar from "./components/NavBar";
-import Footer from "./components/Footer";
 import axios from 'axios';
 import {useState} from "react";
 import {useEffect} from "react";
@@ -39,8 +37,6 @@ export default function AddProduct() {
             const response = await axios.get(
                 `http://127.0.0.1:5000/adminPage/products/${id}`
             );
-
-            // Set product details as default values
             setProduct(response.data);
         } catch (error) {
             console.error("Error fetching product details:", error);
@@ -130,6 +126,5 @@ export default function AddProduct() {
             </div>
         </div>
     </div>
-    <Footer />
     </body>
 }

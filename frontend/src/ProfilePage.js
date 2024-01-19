@@ -1,5 +1,3 @@
-import NavBar from "./components/NavBar";
-import Footer from "./components/Footer";
 import "./style/ProfilePage.css";
 import validator from "validator/es";
 export default function ProfilePage() {
@@ -74,7 +72,6 @@ export default function ProfilePage() {
                 </div>
             </div>
         </div>
-        <Footer></Footer>
         </body>
     </div>
 }

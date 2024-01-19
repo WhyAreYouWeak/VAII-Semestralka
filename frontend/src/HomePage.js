@@ -1,8 +1,6 @@
 import React from "react";
-import NavBar from "./components/NavBar";
 import './style/HomePage.css';
 import ItemTile from "./components/ItemTile";
-import Footer from "./components/Footer";
 export default function HomePage() {
   return <body>
 
@@ -32,6 +30,5 @@ export default function HomePage() {
       <ItemTile title={"Metro 2033"} price={12} imageURL={"metro2033"}></ItemTile>
     </div>
   </div>
-  <Footer></Footer>
   </body>
 }

@@ -1,6 +1,4 @@
 import React, {useEffect, useState} from "react";
-import NavBar from "./components/NavBar";
-import Footer from "./components/Footer";
 import ItemTile from "./components/ItemTile";
 import "./style/HomePage.css";
 import "./style/AdminPage.css";
@@ -40,7 +38,6 @@ export default function AdminPage() {
                 ))}
             </div>
         </div>
-        <Footer />
         </body>
     );
 }
