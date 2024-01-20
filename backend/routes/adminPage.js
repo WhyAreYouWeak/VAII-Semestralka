@@ -85,7 +85,7 @@ router.post('/products/:id', upload.single('imageFile'), async function(req, res
         let productCategory = updatedProductInfo.category;
         console.log("new product category " + updatedProductInfo.newCategory);
         console.log("old product category " + productCategory);
-        const existingCategory = await Category.findOne({ name: updatedProductInfo.newCategory });
+
         //console.log(existingCategory.name);
         console.log(updatedProductInfo.newCategory !== 'undefined');
         if (updatedProductInfo.newCategory !== 'undefined') {
@@ -93,6 +93,7 @@ router.post('/products/:id', upload.single('imageFile'), async function(req, res
             productCategory = updatedProductInfo.newCategory;
            await category.save();
         }
+        const existingCategory = await Category.findOne({ name: productCategory });
         if (req.file) {
             const imageFile = req.file;
             const resizedImageBuffer = await sharp(imageFile.path)
@@ -110,7 +111,7 @@ router.post('/products/:id', upload.single('imageFile'), async function(req, res
                 name: updatedProductInfo.name,
                 author: updatedProductInfo.author,
                 price: updatedProductInfo.price,
-                category: productCategory,
+                category: existingCategory,
                 ISBN: updatedProductInfo.ISBN,
                 binding: updatedProductInfo.binding,
                 weight: updatedProductInfo.weight,

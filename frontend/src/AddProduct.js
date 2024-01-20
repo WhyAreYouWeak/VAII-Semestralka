@@ -126,6 +126,8 @@ export default function AddProduct() {
             console.error('Error fetching categories:', error);
         }
     };
+    const foundCategory = categories.find(category => category._id === product.category);
+    console.log("najdena kategoria " + (foundCategory ? foundCategory.name : "Category not found"));
 
     return <body>
 
@@ -154,7 +156,7 @@ export default function AddProduct() {
                             className="form-select"
                             id="category"
                             name="category"
-                            value={product.category}
+                            value={foundCategory ? foundCategory.name : ''}
                             onChange={handleInputChange}
                         >
                             <option value="" disabled>

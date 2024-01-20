@@ -7,10 +7,10 @@ const User = require('./models/User');
 passport.use(new LocalStrategy({ usernameField: 'email' }, async (email, password, done) => {
     console.log("pasport use bolo spustene");
     try {
-        const user = await User.findOne({ email });
-
+        const user = await User.findOne({ email: email.toLowerCase() });
+        console.log("email je " + email);
         if (!user) {
-            console.log("pozivatel neexistuje")
+            console.log("pozivatel neexistuje " + user);
             return done(null, false, { message: 'Invalid email or password.' });
         }
 

@@ -15,8 +15,8 @@ const itemSchema = new mongoose.Schema({
         require: true,
     },
     category: {
-      type: String,
-      require: false,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Category',
     },
     ISBN: {
         type: String,
