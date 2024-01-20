@@ -21,15 +21,20 @@ router.post('/addProduct', upload.single('imageFile') ,async function(req, res) 
     try {
         const product = req.body;
         const imageFile = req.file;
-        console.log("meno suboru je "  + req.file.filename);
-        console.log("id produktu je " + product._id);
+       // console.log("meno suboru je "  + req.file.filename);
+       // console.log("id produktu je " + product._id);
         if (imageFile) {
             product.imageURL = `books/${imageFile.filename}`;
         }
 
-        if (!Category.findOne(product.category)) {
-            console.log(product.category);
-            const category = new Category({name: product.category});
+        let productCategory = product.category;
+        console.log("new product category " + product.newCategory);
+        console.log("old product category " + productCategory);
+        //console.log(existingCategory.name);
+        console.log(product.newCategory !== 'undefined');
+        if (product.newCategory !== 'undefined') {
+            const category = new Category({name: product.newCategory});
+            productCategory = product.newCategory;
             await category.save();
         }
 
@@ -41,7 +46,7 @@ router.post('/addProduct', upload.single('imageFile') ,async function(req, res) 
                 name: product.name,
                 author: product.author,
                 price: product.price,
-                category: product.category,
+                category: productCategory,
                 ISBN: product.ISBN,
                 binding: product.binding,
                 weight: product.weight,

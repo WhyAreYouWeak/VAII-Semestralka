@@ -25,7 +25,7 @@ export default function ProductsPage() {
     return <body>
 
     <div className="container-md position-relative ">
-        <div className="row">
+        <div className="productsPageRow row">
             <div className="col">
         <div className="d-flex justify-content-between">
             <div className="left-menu">
