@@ -1,16 +1,16 @@
 .left-menu {
     width: 200px;
-    background-color: #f8f9fa;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 2px solid black;
+    box-shadow: 59px 48px 20px -7px rgba(0,0,0,0.1);
 
 }
 
 .left-menu h3 {
     margin-bottom: 15px;
     font-size: 18px;
-    color: #495057;
+    color: white;
 }
 
 .left-menu ul {
@@ -44,4 +44,9 @@
 
 .allProductsButton {
     margin-bottom: 5%;
+}
+
+.menuTitle {
+    color: white;
+    font-weight: bold;
 }

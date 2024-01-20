@@ -38,8 +38,8 @@ export default function ProductsPage() {
         <div className="productsPageRow row">
             <div className="menuContainer col-md-auto">
                 <div className="d-flex justify-content-between">
-                    <div className="left-menu">
-                        <h3>Kategórie</h3>
+                    <div className="left-menu container --bs-secondary-bg-rgb ">
+                        <h3 className="menuTitle">Kategórie</h3>
                         <button className=" allProductsButton btn btn-dark" onClick={() => handleCategoryChange(null)}>
                             Všetky produkty
                         </button>
