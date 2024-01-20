@@ -5,6 +5,7 @@ const Category = require("../models/Category");
 const path = require('path');
 
 const multer = require('multer');
+const sharp = require("sharp");
 
 
 const storage = multer.diskStorage({
@@ -23,8 +24,17 @@ router.post('/addProduct', upload.single('imageFile') ,async function(req, res) 
         const imageFile = req.file;
        // console.log("meno suboru je "  + req.file.filename);
        // console.log("id produktu je " + product._id);
+
+
         if (imageFile) {
-            product.imageURL = `books/${imageFile.filename}`;
+            const resizedImageBuffer = await sharp(imageFile.path)
+                .resize({ width: 250, height: 379 })
+                .toBuffer();
+
+            // Save the resized image
+            const resizedImageFilename = `resized_${imageFile.filename}`;
+            await sharp(resizedImageBuffer).toFile(`../frontend/public/books/${resizedImageFilename}`);
+            product.imageURL = `books/${resizedImageFilename}`;
         }
 
         let productCategory = product.category;
@@ -85,7 +95,14 @@ router.post('/products/:id', upload.single('imageFile'), async function(req, res
         }
         if (req.file) {
             const imageFile = req.file;
-            updatedProductInfo.imageURL = `books/${imageFile.filename}`;
+            const resizedImageBuffer = await sharp(imageFile.path)
+                .resize({ width: 250, height: 379 })
+                .toBuffer();
+
+            // Save the resized image
+            const resizedImageFilename = `resized_${imageFile.filename}`;
+            await sharp(resizedImageBuffer).toFile(`../frontend/public/books/${resizedImageFilename}`);
+            updatedProductInfo.imageURL = `books/${resizedImageFilename}`;
         }
         // Update existing product information (excluding image file)
         await Item.findByIdAndUpdate(productID, {
