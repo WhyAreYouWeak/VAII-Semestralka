@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Item = require("../models/Item");
+const Category = require("../models/Category");
 const path = require('path');
 
 const multer = require('multer');
@@ -24,6 +25,12 @@ router.post('/addProduct', upload.single('imageFile') ,async function(req, res) 
         console.log("id produktu je " + product._id);
         if (imageFile) {
             product.imageURL = `books/${imageFile.filename}`;
+        }
+
+        if (!Category.findOne(product.category)) {
+            console.log(product.category);
+            const category = new Category({name: product.category});
+            await category.save();
         }
 
         if (product._id) {
@@ -57,11 +64,20 @@ router.post('/addProduct', upload.single('imageFile') ,async function(req, res) 
 });
 router.post('/products/:id', upload.single('imageFile'), async function(req, res) {
     try {
+
         const productID = req.params.id;
         const updatedProductInfo = req.body;
-        console.log(updatedProductInfo);
-
-        // Check if the product has an image file
+        let productCategory = updatedProductInfo.category;
+        console.log("new product category " + updatedProductInfo.newCategory);
+        console.log("old product category " + productCategory);
+        const existingCategory = await Category.findOne({ name: updatedProductInfo.newCategory });
+        //console.log(existingCategory.name);
+        console.log(updatedProductInfo.newCategory !== 'undefined');
+        if (updatedProductInfo.newCategory !== 'undefined') {
+            const category = new Category({name: updatedProductInfo.newCategory});
+            productCategory = updatedProductInfo.newCategory;
+           await category.save();
+        }
         if (req.file) {
             const imageFile = req.file;
             updatedProductInfo.imageURL = `books/${imageFile.filename}`;
@@ -72,7 +88,7 @@ router.post('/products/:id', upload.single('imageFile'), async function(req, res
                 name: updatedProductInfo.name,
                 author: updatedProductInfo.author,
                 price: updatedProductInfo.price,
-                category: updatedProductInfo.category,
+                category: productCategory,
                 ISBN: updatedProductInfo.ISBN,
                 binding: updatedProductInfo.binding,
                 weight: updatedProductInfo.weight,

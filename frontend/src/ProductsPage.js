@@ -24,18 +24,24 @@ export default function ProductsPage() {
     }, []);
     return <body>
 
-    <div className="container-md position-relative">
-        <div className="left-menu">
-            <h3>Kategórie</h3>
-            <ul>
-                {categories.map((category) => (
-                    <li key={category._id}>
-                        <Link to={`/category/${category._id}`}>{category.name}</Link>
-                    </li>
-                ))}
-            </ul>
+    <div className="container-md position-relative ">
+        <div className="row">
+            <div className="col">
+        <div className="d-flex justify-content-between">
+            <div className="left-menu">
+                <h3>Kategórie</h3>
+                <ul>
+                    {categories.map((category) => (
+                        <li key={category._id}>
+                            <Link to={`/category/${category._id}`}>{category.name}</Link>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+            </div>
         </div>
-        <div className="products container d-flex flex-wrap justify-content-center">
+            <div className="col">
+            <div className="products container d-flex flex-wrap justify-content-center">
             {products.map((product) => (
                 <Link to={`/add-product?productId=${product._id}`} key={product._id}>
                     <ItemTile
@@ -45,6 +51,8 @@ export default function ProductsPage() {
                     ></ItemTile>
                 </Link>
             ))}
+        </div>
+            </div>
         </div>
     </div>
     </body>

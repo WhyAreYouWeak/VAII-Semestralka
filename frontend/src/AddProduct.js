@@ -10,6 +10,7 @@ export default function AddProduct() {
         author:'',
         price: '',
         category: '',
+        newCategory:'',
         ISBN: '',
         binding: '',
         weight: '',
@@ -19,7 +20,7 @@ export default function AddProduct() {
 
     });
 
-
+    const [categories, setCategories] = useState([]);
     const [productId, setProductId] = useState(null);
     const navigate = useNavigate();
     useEffect(() => {
@@ -32,6 +33,7 @@ export default function AddProduct() {
             console.log(id);
             fetchProductDetails(id);
         }
+        fetchCategories();
     }, []);
 
     const fetchProductDetails = async (id) => {
@@ -44,11 +46,13 @@ export default function AddProduct() {
             console.error("Error fetching product details:", error);
         }
     };
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setProduct((prevProduct) => ({
             ...prevProduct,
-            [name]: value
+            [name]: value,
+            newCategory: name === 'newCategory' ? value : prevProduct.newCategory,
         }));
     };
 
@@ -74,7 +78,6 @@ export default function AddProduct() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         try {
 
             const formData = new FormData();
@@ -83,6 +86,7 @@ export default function AddProduct() {
             formData.append('author', product.author);
             formData.append('price', product.price);
             formData.append('category',product.category);
+            formData.append("newCategory",product.newCategory);
             formData.append('ISBN', product.ISBN);
             formData.append('binding', product.binding);
             formData.append('weight', product.weight);
@@ -113,6 +117,16 @@ export default function AddProduct() {
         }
     };
 
+    const fetchCategories = async () => {
+        try {
+            const response = await axios.get('http://127.0.0.1:5000/products/getCategories');
+            console.log("kategorie" + response.data);
+            setCategories(response.data);
+        } catch (error) {
+            console.error('Error fetching categories:', error);
+        }
+    };
+
     return <body>
 
     <div className="container-md">
@@ -133,8 +147,37 @@ export default function AddProduct() {
                         <input type="text" className="form-control" id="price" name="price" value={product.price} onChange={handleInputChange} required />
                     </div>
                     <div className="mb-3">
-                        <label htmlFor="price" className="form-label">Kategória:</label>
-                        <input type="text" className="form-control" id="category" name="category" value={product.category} onChange={handleInputChange} required />
+                        <label htmlFor="category" className="form-label">
+                            Kategória:
+                        </label>
+                        <select
+                            className="form-select"
+                            id="category"
+                            name="category"
+                            value={product.category}
+                            onChange={handleInputChange}
+                        >
+                            <option value="" disabled>
+                                Vyberte kategóriu
+                            </option>
+                            {categories.map((category) => (
+                                <option key={category.name} value={category.name}>
+                                    {category.name}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="newCategory" className="form-label">
+                            Nová kategória:
+                        </label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="newCategory"
+                            name="newCategory"
+                            onChange={handleInputChange}
+                        />
                     </div>
                     <div className="mb-3">
                         <label htmlFor="ISBN" className="form-label">ISBN:</label>

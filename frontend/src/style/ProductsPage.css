@@ -33,3 +33,7 @@
 .left-menu a:hover {
     color: #0056b3;
 }
+
+.row {
+    padding-left: 3% !important;
+}
