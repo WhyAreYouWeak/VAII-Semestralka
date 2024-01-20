@@ -61,7 +61,7 @@ export default function ProductsPage() {
                 <div className="products container d-flex flex-wrap justify-content-center">
                     {filteredProducts.map((product) => (
                         <Link
-                            to={`/add-product?productId=${product._id}`}
+                            to={`/product?productId=${product._id}`}
                             key={product._id}
                         >
                             <ItemTile
