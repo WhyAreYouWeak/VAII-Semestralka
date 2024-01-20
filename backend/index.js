@@ -43,10 +43,11 @@ app.get('/getUserEmail', ensureAuthenticated ,(req, res) => {
 const loginRegister = require('./routes/loginRegister');
 const adminPage = require('./routes/adminPage');
 const productsPage = require('./routes/productsPage');
+const reviews = require('./routes/reviews');
 app.use('/loginRegister',loginRegister);
 app.use('/adminPage', adminPage);
 app.use('/products', productsPage);
-
+app.use('/reviews', reviews);
 app.get('/', (req, res) => {
     console.log(req.isAuthenticated());
 })

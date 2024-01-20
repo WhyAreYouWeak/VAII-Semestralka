@@ -36,6 +36,7 @@ export default function ProductDetail() {
 
     const [reviews, setReviews] = useState([]);
     const [newReview, setNewReview] = useState('');
+    const [reviewType, setReviewType] = useState('odporučam'); // Default to 'odporučam'
 
     useEffect(() => {
 
@@ -60,10 +61,16 @@ export default function ProductDetail() {
     const handleReviewSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post(`http://127.0.0.1:5000/reviews`, {productId, review: newReview});
-            const reviewsResponse = await axios.get(`http://127.0.0.1:5000/reviews?productId=${productId}`);
-            setReviews(reviewsResponse.data);
+            const urlParams = new URLSearchParams(window.location.search);
+            const id = urlParams.get("productId");
+            console.log("productID "  + id);
+            console.log("newReview " + newReview );
+            console.log("reviewType " + reviewType );
+            await axios.post(`http://127.0.0.1:5000/reviews/add-review`, {productId:id, text: newReview, type: reviewType},{withCredentials:true});
+           // const reviewsResponse = await axios.get(`http://127.0.0.1:5000/reviews?productId=${productId}`);
+            //setReviews(reviewsResponse.data);
             setNewReview('');
+            setReviewType('odporučam');
         } catch (error) {
             console.error('Error adding a review:', error);
         }
@@ -103,7 +110,6 @@ export default function ProductDetail() {
                     {userEmail &&
                         <form onSubmit={handleReviewSubmit}>
                             <div className="form-group">
-                                <label htmlFor="newReview">Pridať recenziu</label>
                                 <textarea
                                     className="form-control"
                                     id="newReview"
@@ -112,7 +118,19 @@ export default function ProductDetail() {
                                     onChange={(e) => setNewReview(e.target.value)}
                                 />
                             </div>
-                            <button type="submit" className="reviewSubmitButton btn btn-primary">Submit Review</button>
+                            <div className="form-group">
+                                <label htmlFor="reviewType">Hodnotenie:</label>
+                                <select
+                                    className="form-control"
+                                    id="reviewType"
+                                    value={reviewType}
+                                    onChange={(e) => setReviewType(e.target.value)}
+                                >
+                                    <option value="odporučam">Odporučam</option>
+                                    <option value="neodporučam">Neodporučam</option>
+                                </select>
+                            </div>
+                            <button type="submit" className="reviewSubmitButton btn btn-primary">Pridať recenziu</button>
                         </form>
                     }
                     <ul className="reviews">
