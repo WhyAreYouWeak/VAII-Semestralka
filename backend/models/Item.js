@@ -35,6 +35,9 @@ const itemSchema = new mongoose.Schema({
     publisher: {
         type: String,
     },
+    about: {
+        type: String,
+    },
     imageURL: {
         type: String,
     },

@@ -62,6 +62,7 @@ router.post('/addProduct', upload.single('imageFile') ,async function(req, res) 
                 weight: product.weight,
                 language: product.language,
                 publisher: product.publisher,
+                about: product.about,
                 imageURL: product.imageURL
             });
             await item.save();
@@ -117,6 +118,7 @@ router.post('/products/:id', upload.single('imageFile'), async function(req, res
                 weight: updatedProductInfo.weight,
                 language: updatedProductInfo.language,
                 publisher: updatedProductInfo.publisher,
+                about: updatedProductInfo.about,
                 imageURL: updatedProductInfo.imageURL,
             }
         });

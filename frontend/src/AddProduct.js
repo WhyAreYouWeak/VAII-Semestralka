@@ -16,6 +16,7 @@ export default function AddProduct() {
         weight: '',
         language: '',
         publisher: '',
+        about: '',
         imageFile: null,
 
     });
@@ -92,6 +93,7 @@ export default function AddProduct() {
             formData.append('weight', product.weight);
             formData.append('language', product.language);
             formData.append('publisher', product.publisher);
+            formData.append('about', product.about);
             formData.append('imageFile', product.imageFile);
             const config = {
                 headers: {
@@ -200,6 +202,10 @@ export default function AddProduct() {
                     <div className="mb-3">
                         <label htmlFor="publisher" className="form-label">Vydavateľ:</label>
                         <input type="text" className="form-control" id="publisher" name="publisher" value={product.publisher} onChange={handleInputChange} required />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="publisher" className="form-label">O knihe:</label>
+                        <input type="text" className="form-control" id="about" name="about" value={product.about} onChange={handleInputChange} required />
                     </div>
                     <div className="mb-3">
                         <label htmlFor="imageURL" className="form-label">Obrazok:</label>

@@ -73,3 +73,13 @@
     margin-top: 2%;
     margin-bottom: 2%;
 }
+
+.userReviewTitle {
+    color: white;
+    font-weight: bold;
+    margin-bottom: 0 !important;
+}
+
+.reviews {
+    margin-bottom: 0 !important;
+}
