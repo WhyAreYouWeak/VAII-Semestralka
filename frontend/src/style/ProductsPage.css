@@ -50,3 +50,26 @@
     color: white;
     font-weight: bold;
 }
+
+.itemDescriptionCol {
+    margin-left: 5%;
+}
+
+.title {
+    padding-left: 34%;
+}
+
+.priceTitle {
+    color: white;
+    font-size: 50px;
+}
+
+.reviewsContainer {
+    width: 80%;
+    padding-left: 10%;
+}
+
+.reviewSubmitButton {
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
