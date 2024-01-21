@@ -5,8 +5,6 @@ const Order = require('../models/Order')
 router.post('/createOrder/:id', async (req, res) => {
     const itemId = req.params.id;
     const user = req.user;
-    console.log("odrder item id is " + itemId);
-    console.log("user id is " + user);
     try {
         const order = new Order({user: user, productId: itemId })
         await order.save();
@@ -38,7 +36,6 @@ router.get('/getOrder/:id', async (req, res) => {
 
     try {
         const order = await Order.findById(orderId).populate('productId' ).populate('user');
-        console.log("fetching oreder - -----------------------------------------")
         if (!order) {
             return res.status(404).json({ message: 'Order not found' });
         }

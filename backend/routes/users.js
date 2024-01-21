@@ -46,34 +46,40 @@ router.put("/updateUserProfile", async (req, res) => {
 router.put('/updateUserPassword', async (req, res) => {
     try {
         const userId = req.user;
-        console.log("Update user password id je " + userId);
+        if (!req.body.oldPassworcd) {
+            return res.status(200).json('Zadajte stare heslo ' );
+        }
 
-        // Ensure the new password is provided
         if (!req.body.newPassword) {
-            return res.status(400).json({ error: 'New password is required' });
+            return res.status(200).json('Zadajte nove heslo' );
         }
 
-        // Ensure the confirmed password is provided
+
         if (!req.body.confirmPassword) {
-            return res.status(400).json({ error: 'Confirmed password is required' });
+            return res.status(200).json('Zadajte potvrdenie hesla' );
         }
 
-        // Check if the new password and confirmed password match
+
         if (req.body.newPassword !== req.body.confirmPassword) {
-            return res.status(400).json({ error: 'New password and confirmed password do not match' });
+            return res.status(200).json('Hesla sa nezhoduju' );
         }
 
-        // Hash the new password
+        const oldPasswordMatch = await bcrypt.compare(req.body.oldPassworcd, userId.password);
+
+        if (!oldPasswordMatch) {
+            return res.status(200).json( 'Stare heslo sa nezhoduje' );
+        }
+
         const hashedPassword = await bcrypt.hash(req.body.newPassword, 10);
 
-        // Update the user's password in the database
+
         const result = await User.findByIdAndUpdate(userId, { password: hashedPassword }, { new: true });
 
         if (!result) {
             return res.status(404).json({ error: 'User not found' });
         }
 
-        res.status(200).json(result);
+        res.status(200).json("Heslo uspesne zmenene");
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal Server Error' });

@@ -79,7 +79,7 @@ export default function ProfilePage() {
     const handleFakturacneUdajeChange = async (event) => {
         event.preventDefault();
 
-        // Extract the updated user information from the form
+
         const updatedUser = {
             meno: user.meno,
             priezvisko: user.priezvisko,
@@ -102,10 +102,13 @@ export default function ProfilePage() {
         const newPassword = event.target.elements.newPassword.value;
         const confirmPassword = event.target.elements.confirmPassword.value;
         if (newPassword !== confirmPassword) {
+            alert("Hesla sa nezhoduju");
             return;
         }
         try {
-            await axios.put(`http://127.0.0.1:5000/users/updateUserPassword`, { newPassword, confirmPassword,oldPassworcd  },{withCredentials:true});
+            await axios.put(`http://127.0.0.1:5000/users/updateUserPassword`, { newPassword, confirmPassword, oldPassworcd  },{withCredentials:true}).then((response) => {
+               alert(response.data);
+           });
 
         } catch (error) {
             console.error("Failed to change password: ", error);

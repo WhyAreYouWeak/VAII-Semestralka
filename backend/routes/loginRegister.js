@@ -32,7 +32,6 @@ router.post('/register', async function (req,res) {
 router.post('/login', (req, res, next) => {
     passport.authenticate("local", async (err, user, info ) => {
         if (err) {
-            console.log("neplatny email alebo heslo2");
             return next(err);
         }
         else if (!user) {
