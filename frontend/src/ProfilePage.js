@@ -2,6 +2,7 @@ import "./style/ProfilePage.css";
 import validator from "validator/es";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
+import  { useNavigate  }  from 'react-router-dom';
 
 export default function ProfilePage() {
 
@@ -26,7 +27,7 @@ export default function ProfilePage() {
 
     const [userId, setUserId] = useState(null);
     const [passwordsMatch, setPasswordsMatch] = useState(true);
-
+    const navigate = useNavigate();
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search);
         const id = urlParams.get("userId")
@@ -92,6 +93,10 @@ export default function ProfilePage() {
         } catch (error) {
             console.error("Failed to change password: ", error);
         }
+    };
+    const Logout = () => {
+        axios.post('http://127.0.0.1:5000/loginRegister/logout',{},{withCredentials:true}).then(r => window.location.reload()).catch();
+        navigate("/");
     };
 
 
@@ -172,6 +177,15 @@ export default function ProfilePage() {
                         </form>
                     </div>
                 </div>
+
+                <div className="card">
+                    <div className="card-body ">
+                        <button className="btn  btn-info" onClick={Logout} >Odhlásiť</button>
+                        <button className="btn btn-primary btn-danger">Vymazať účet</button>
+                    </div>
+                </div>
+            </div>
+            <div className="profileCol col-md-8">
             </div>
         </div>
     </div>

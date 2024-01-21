@@ -50,11 +50,13 @@ const adminPage = require('./routes/adminPage');
 const productsPage = require('./routes/productsPage');
 const reviews = require('./routes/reviews');
 const users = require('./routes/users');
+const orders = require('./routes/orders');
 app.use('/loginRegister',loginRegister);
 app.use('/adminPage', adminPage);
 app.use('/products', productsPage);
 app.use('/reviews', reviews);
 app.use('/users', users);
+app.use('/orders',  orders);
 app.get('/', (req, res) => {
     console.log(req.isAuthenticated());
 })

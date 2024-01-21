@@ -21,7 +21,7 @@ router.post('/add-review', async (req, res) => {
 router.get('/getReviews/:id', async (req, res) => {
     try {
         const itemId = req.params.id;
-        console.log(itemId);
+        //console.log(itemId);
 
         const item = await Item.findOne({ _id: itemId });
 
@@ -29,7 +29,7 @@ router.get('/getReviews/:id', async (req, res) => {
             return res.status(404).json({ error: 'Item not found' });
         }
 
-        console.log(item.name);
+       // console.log(item.name);
 
         // Assuming you have a field in Review model like 'item' that references Item model
         const reviews = await Review.find({ productId: item })
@@ -39,9 +39,9 @@ router.get('/getReviews/:id', async (req, res) => {
             })
             .select('text type');
 
-        console.log(reviews);
+        //console.log(reviews);
 
-        console.log(reviews);
+        //console.log(reviews);
 
         res.status(200).json(reviews);
     } catch (error) {

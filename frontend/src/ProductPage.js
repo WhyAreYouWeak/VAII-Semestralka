@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import {useParams} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 import "./style/ProductsPage.css"
 import ItemTile from "./components/ItemTile";
 import ReviewBox from "./components/ReviewBox";
@@ -38,7 +38,7 @@ export default function ProductDetail() {
 
     const [reviews, setReviews] = useState([]);
     const [newReview, setNewReview] = useState('');
-    const [reviewType, setReviewType] = useState('odporučam'); // Default to 'odporučam'
+    const [reviewType, setReviewType] = useState('odporučam');
 
     useEffect(() => {
 
@@ -70,14 +70,25 @@ export default function ProductDetail() {
             console.log("newReview " + newReview );
             console.log("reviewType " + reviewType );
             await axios.post(`http://127.0.0.1:5000/reviews/add-review`, {productId:id, text: newReview, type: reviewType},{withCredentials:true});
-           // const reviewsResponse = await axios.get(`http://127.0.0.1:5000/reviews?productId=${productId}`);
-            //setReviews(reviewsResponse.data);
             setNewReview('');
             setReviewType('odporučam');
         } catch (error) {
             console.error('Error adding a review:', error);
         }
     };
+
+    const handleOrder = async () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get("productId");
+        try {
+          const order =  await axios.post(`http://127.0.0.1:5000/orders/createOrder/${id}`,{},{withCredentials:true});
+          alert(order.data.message);
+        } catch (error) {
+            console.log("Order failed", error);
+        }
+
+    }
+
     if (product.name === '') return null;
     return (
         <div>
@@ -99,7 +110,10 @@ export default function ProductDetail() {
                         <p><b>Jazyk:</b> {product.language}</p>
                         <p><b>Vydavateľstvo:</b> {product.publisher}</p>
                         <div className="priceTitle">{product.price} €</div>
-                        <button type="submit" className="btn btn-primary">Vložiť do košíka</button>
+                        {userEmail ?
+                        <button type="submit" className="btn btn-primary" onClick={handleOrder}>Objednať</button> :
+                            <Link to={"/sign-register"}><button type="submit" className="btn btn-primary">Objednať</button> </Link>
+                        }
                     </div>
                 </div>
                 <div className="reviewsContainer mt-md-4 ">
