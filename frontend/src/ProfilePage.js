@@ -74,8 +74,6 @@ export default function ProfilePage() {
         }));
     };
 
-
-
     const handleFakturacneUdajeChange = async (event) => {
         event.preventDefault();
 
@@ -257,8 +255,7 @@ export default function ProfilePage() {
                 </div>
                 </div>
             )}
-            <div className="profileCol col-md-8">
-            </div>
+
         </div>
     </div>
     </body>

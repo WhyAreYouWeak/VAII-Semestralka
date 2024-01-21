@@ -11,7 +11,6 @@ export default function LoginRegisterPage() {
     const [registerEmail, setRegisterEmail] = useState('');
     const [registerPassword, setRegisterPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [data, setData] = useState('');
     const isEmailValid = (email) => {
         console.error(email);
         if (!validator.isEmail(email)) {

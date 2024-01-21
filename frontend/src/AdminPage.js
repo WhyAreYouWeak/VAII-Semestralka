@@ -58,7 +58,6 @@ export default function AdminPage() {
             </body>
         );
     }  else {
-        navigate("/");
         return null;
     }
 }

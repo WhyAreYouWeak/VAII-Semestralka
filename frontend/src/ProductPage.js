@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import {Link, useParams} from 'react-router-dom';
 import "./style/ProductsPage.css"
-import ItemTile from "./components/ItemTile";
 import ReviewBox from "./components/ReviewBox";
 
 export default function ProductDetail() {
@@ -28,7 +27,7 @@ export default function ProductDetail() {
                 const response = await axios.get('http://127.0.0.1:5000/getUserEmail', {withCredentials: true}); // Replace with your actual API endpoint
                 setUserEmail(response.data.email);
             } catch (error) {
-                // Handle errors
+
                 console.error('Error fetching user email:', error);
             }
         };
