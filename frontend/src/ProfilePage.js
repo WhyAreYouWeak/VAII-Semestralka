@@ -4,6 +4,7 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import  { useNavigate  }  from 'react-router-dom';
 
+
 export default function ProfilePage() {
 
     const isEmailValid = (email) => {
@@ -94,9 +95,24 @@ export default function ProfilePage() {
             console.error("Failed to change password: ", error);
         }
     };
-    const Logout = () => {
-        axios.post('http://127.0.0.1:5000/loginRegister/logout',{},{withCredentials:true}).then(r => window.location.reload()).catch();
+    const Logout = async() => {
+        try {
+            await axios.post('http://127.0.0.1:5000/loginRegister/logout',{},{withCredentials:true});
+            window.location.reload()
+        } catch (error) {
+            console.error("Failed to logout: ", error);
+        }
         navigate("/");
+    };
+
+    const deleteUser = async() => {
+        try {
+            await axios.post('http://127.0.0.1:5000/loginRegister/delete', {},{withCredentials: true});
+            navigate("/");
+            window.location.reload();
+        } catch (error) {
+            console.log("Failed to delete" + error);
+        }
     };
 
 
@@ -181,7 +197,7 @@ export default function ProfilePage() {
                 <div className="card">
                     <div className="card-body ">
                         <button className="btn  btn-info" onClick={Logout} >Odhlásiť</button>
-                        <button className="btn btn-primary btn-danger">Vymazať účet</button>
+                        <button className="btn btn-primary btn-danger" onClick={deleteUser}>Vymazať účet</button>
                     </div>
                 </div>
             </div>

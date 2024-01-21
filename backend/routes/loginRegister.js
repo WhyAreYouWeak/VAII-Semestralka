@@ -58,6 +58,19 @@ router.post('/logout', (req, res, next) => {
    });
 });
 
+router.post('/delete', async (req, res, next) => {
+    console.log(" Delete " + req.user);
+    await User.findByIdAndDelete(req.user);
+    req.logout((error) => {
+        if (error) {
+            return res.status(400).send(error)
+        } else {
+            return res.status(200).send("Logout success.");
+        }
+    });
+
+});
+
 router.get('/success', (req, res) => {
 
 

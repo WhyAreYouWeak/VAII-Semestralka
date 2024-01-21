@@ -5,18 +5,18 @@ const bcrypt = require('bcrypt');
 const User = require('./models/User');
 
 passport.use(new LocalStrategy({ usernameField: 'email' }, async (email, password, done) => {
-    console.log("pasport use bolo spustene");
+    //console.log("pasport use bolo spustene");
     try {
         const user = await User.findOne({ email: email.toLowerCase() });
-        console.log("email je " + email);
+       // console.log("email je " + email);
         if (!user) {
-            console.log("pozivatel neexistuje " + user);
+          //  console.log("pozivatel neexistuje " + user);
             return done(null, false, { message: 'Invalid email or password.' });
         }
 
         const isPasswordValid = await bcrypt.compare(password, user.password);
-        console.log("email je " + email);
-        console.log("isPassportValid" + isPasswordValid);
+       // console.log("email je " + email);
+       // console.log("isPassportValid" + isPasswordValid);
         if (!isPasswordValid) {
             return done(null, false, { message: 'Invalid email or password.' });
         }
@@ -28,7 +28,7 @@ passport.use(new LocalStrategy({ usernameField: 'email' }, async (email, passwor
 }));
 
 passport.serializeUser((user, done) => {
-    console.log("serializeUser succes.")
+   // console.log("serializeUser succes.")
     done(null, user.id);
 });
 
@@ -38,10 +38,10 @@ passport.deserializeUser(async (id, done) => {
         if (!user) {
             return done(null, false);
         }
-        console.log("Desarialization succes.")
+        //console.log("Desarialization succes.")
         done(null, user);
     } catch (error) {
-        console.error("Error in deserializeUser:", error);
+        //console.error("Error in deserializeUser:", error);
         done(error);
     }
 });
