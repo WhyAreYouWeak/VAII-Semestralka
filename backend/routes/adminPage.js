@@ -163,4 +163,15 @@ router.delete('/products/:id', async function(req, res) {
     }
 });
 
+router.get('/latestProducts', async function(req, res) {
+    try {
+        const latestProducts = await Item.find().sort({ createdAt: -1 }).limit(4);
+        res.status(200).json(latestProducts);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Failed to fetch latest products');
+    }
+});
+
+
 module.exports = router;

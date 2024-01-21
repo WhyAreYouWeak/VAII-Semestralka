@@ -38,8 +38,6 @@ export default function NavBar() {
                 <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse " id="navbarNav">
-                <input className="form-control me-2 align-content-lg-end w-25" type="search" placeholder="Vyhladat" aria-label="Search"/>
-                <button className="btn btn-outline-light" type="submit">Vyhľadať</button>
                 <ul className="navbar-nav">
                     <li className="nav-item">
                        <Link to="/"> <a className="nav-link"> Domov</a>  </Link>

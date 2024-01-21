@@ -42,11 +42,11 @@ export default function LoginRegisterPage() {
         }
     };
 
-    const handleLoginSubmit = (event) => {
+    const handleLoginSubmit = async (event) => {
         event.preventDefault();
         if (isEmailValid(loginEmail) && loginPassword) {
             const url = "http://127.0.0.1:5000/loginRegister/login";
-            axios
+            await axios
                 .post(url, { email: loginEmail, password: loginPassword },{withCredentials:true})
                 .then((response) => {
                     console.log("Prihlasenie uspesne", response.data);
@@ -56,7 +56,6 @@ export default function LoginRegisterPage() {
                 .catch((error) => {
                     console.error("Error fetching data:", error);
                 });
-
         } else {
             if (!isEmailValid(loginEmail)) {
                 alert("Zly tvar emailu");

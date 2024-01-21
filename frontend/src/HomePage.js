@@ -1,7 +1,22 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import './style/HomePage.css';
 import ItemTile from "./components/ItemTile";
+import axios from "axios";
+import {Link} from "react-router-dom";
 export default function HomePage() {
+  const [latestProducts, setLatestProducts] = useState([]);
+  useEffect(() => {
+    const fetchLatestProducts = async () => {
+      try {
+        const response = await axios.get("http://127.0.0.1:5000/adminPage/latestProducts");
+        setLatestProducts(response.data);
+      } catch (error) {
+        console.error("Error fetching latest products:", error);
+      }
+    };
+
+    fetchLatestProducts();
+  }, []);
   return <body>
 
   <div className="container-md">
@@ -24,10 +39,18 @@ export default function HomePage() {
       </h2>
     </div>
     <div className="newProducts container  d-flex flex-wrap justify-content-center">
-      <ItemTile title={"Metro 2033"} price={12} imageURL={"metro2033"}></ItemTile>
-      <ItemTile title={"Metro 2033"} price={12} imageURL={"metro2033"}></ItemTile>
-      <ItemTile title={"Metro 2033"} price={12} imageURL={"metro2033"}></ItemTile>
-      <ItemTile title={"Metro 2033"} price={12} imageURL={"metro2033"}></ItemTile>
+      {latestProducts.map((product) => (
+          <Link
+              to={`/product?productId=${product._id}`}
+              key={product._id}
+          >
+            <ItemTile
+                title={product.name}
+                price={product.price}
+                imageURL={product.imageURL}
+            ></ItemTile>
+          </Link>
+      ))}
     </div>
   </div>
   </body>
