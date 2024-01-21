@@ -25,6 +25,7 @@ export default function ProfilePage() {
     });
 
     const [userId, setUserId] = useState(null);
+    const [passwordsMatch, setPasswordsMatch] = useState(true);
 
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search);
@@ -54,6 +55,8 @@ export default function ProfilePage() {
         }));
     };
 
+
+
     const handleFakturacneUdajeChange = async (event) => {
         event.preventDefault();
 
@@ -73,6 +76,25 @@ export default function ProfilePage() {
             console.log("nepodarilo sa zmenit udaje" + error);
         }
     };
+
+    const handlePasswordChange = async (event) => {
+        event.preventDefault();
+        const oldPassworcd = event.target.elements.loginPassword.value;
+        const newPassword = event.target.elements.newPassword.value;
+        const confirmPassword = event.target.elements.confirmPassword.value;
+        if (newPassword !== confirmPassword) {
+            setPasswordsMatch(false);
+            return;
+        }
+        try {
+            await axios.put(`http://127.0.0.1:5000/users/updateUserPassword/${userId}`, { newPassword, confirmPassword,oldPassworcd  });
+
+        } catch (error) {
+            console.error("Failed to change password: ", error);
+        }
+    };
+
+
     return <body>
     <div className="container">
         <div className="row">
@@ -95,23 +117,23 @@ export default function ProfilePage() {
                 <div className="card">
                     <div className="card-body">
                         <h4 className="card-title">Prihlasovacie informácie</h4>
-                        <form>
+                        <form onSubmit={handlePasswordChange}>
                             <div className="form-group">
                                 <label htmlFor="loginEmail">Prihlasovací e-mail</label>
                                 <input type="text" className="form-control" id="loginEmail" value={user.email}/>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="loginPassword">Staré heslo</label>
-                                <input type="password" className="form-control" id="loginPassword" value=""/>
+                                <input type="password" className="form-control" id="loginPassword" />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="newPassword">Nové heslo</label>
-                                <input type="password" className="form-control" id="newPassword" value=""/>
+                                <input type="password" className="form-control" id="newPassword" />
                             </div>
 
                             <div className="form-group">
                                 <label htmlFor="newPassword">Nové heslo znova</label>
-                                <input type="password" className="form-control" id="newPassword" value=""/>
+                                <input type="password" className="form-control" id="confirmPassword" />
                             </div>
                             <button type="submit" className="loginChangeButton btn btn-primary">Zmeniť údaje</button>
                         </form>
