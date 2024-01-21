@@ -8,6 +8,7 @@ import AddProduct from "./AddProduct";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import ProductPage from "./ProductPage";
+import OrderPage from "./OrderPage";
 function App() {
     return (<div className="App">
             <NavBar></NavBar>
@@ -19,6 +20,7 @@ function App() {
                 <Route path="/admin-page" element={<AdminPage></AdminPage>}></Route>
                 <Route path="/add-product" element={<AddProduct></AddProduct>}></Route>
                 <Route path="/product" element={<ProductPage></ProductPage>}></Route>
+                <Route path="/order" element={<OrderPage></OrderPage>}></Route>
             </Routes>
         <Footer></Footer>
     </div> );

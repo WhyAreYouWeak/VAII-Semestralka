@@ -2,7 +2,7 @@ import "./style/ProfilePage.css";
 import validator from "validator/es";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import  { useNavigate  }  from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
 
 export default function ProfilePage() {
@@ -29,6 +29,8 @@ export default function ProfilePage() {
     const [userId, setUserId] = useState(null);
     const [passwordsMatch, setPasswordsMatch] = useState(true);
     const navigate = useNavigate();
+    const [activeSection, setActiveSection] = useState("userInfo");
+    const [orders, setOrders] = useState([]);
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search);
         const id = urlParams.get("userId")
@@ -37,6 +39,15 @@ export default function ProfilePage() {
             console.log(id);
             fetchUserDetails(id);
         }
+        const fetchOrders = async () => {
+            try {
+                const response = await axios.get('http://127.0.0.1:5000/orders/getOrders', { withCredentials: true });
+                setOrders(response.data);
+            } catch (error) {
+                console.error('Error fetching orders:', error);
+            }
+        };
+        fetchOrders();
     }, []);
 
     const fetchUserDetails = async (id) => {
@@ -98,11 +109,12 @@ export default function ProfilePage() {
     const Logout = async() => {
         try {
             await axios.post('http://127.0.0.1:5000/loginRegister/logout',{},{withCredentials:true});
+            navigate("/");
             window.location.reload()
         } catch (error) {
             console.error("Failed to logout: ", error);
         }
-        navigate("/");
+
     };
 
     const deleteUser = async() => {
@@ -115,6 +127,10 @@ export default function ProfilePage() {
         }
     };
 
+    const handleSectionChange = (section) => {
+        setActiveSection(section);
+    };
+
 
     return <body>
     <div className="container">
@@ -125,15 +141,20 @@ export default function ProfilePage() {
                         <h3 className="menuTitle"></h3>
                         <ul>
                             <li>
-                                <button className="btn btn-dark "> Základné informácie</button>
+                                <button className={`btn btn-dark ${activeSection === "userInfo" ? "active" : ""}`} onClick={() => handleSectionChange("userInfo")}>
+                                    Základné informácie
+                                </button>
                             </li>
                             <li>
-                                <button className="btn btn-dark "> Objednávky</button>
+                                <button className={`btn btn-dark ${activeSection === "orders" ? "active" : ""}`} onClick={() => handleSectionChange("orders")}>
+                                    Objednávky
+                                </button>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
+            {activeSection === "userInfo" && (
             <div className="profileCol col-md-8">
                 <div className="card">
                     <div className="card-body">
@@ -201,6 +222,25 @@ export default function ProfilePage() {
                     </div>
                 </div>
             </div>
+            )}
+            {activeSection === "orders" && (
+                <div className="profileCol col-md-8">
+                <div className="card">
+                    <div className="card-body ">
+                    <h4 className="card-title">Objednávky</h4>
+                        <ul>
+                            {orders.map((order) => (
+                                <Link to={`/order?orderId=${order._id}`} >
+                                <li key={order._id}>
+                                    Product ID: {order.productId.name}
+                                </li>
+                                </Link>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+                </div>
+            )}
             <div className="profileCol col-md-8">
             </div>
         </div>
