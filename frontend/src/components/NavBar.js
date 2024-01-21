@@ -52,7 +52,7 @@ export default function NavBar() {
                     </li>
                     <li className="nav-item" >
                         {userEmail ?
-                            <Link to={`/profile?userId=${userId}`} > <a className="nav-link" > {userEmail}</a> </Link>
+                            <Link to={"/profile"} > <a className="nav-link" > {userEmail}</a> </Link>
                             : <Link to="/sign-register" > <a className="nav-link" > Prihlasenie </a> </Link>
                         }
                     </li>

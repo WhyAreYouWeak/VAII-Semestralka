@@ -26,19 +26,13 @@ export default function ProfilePage() {
 
     });
 
-    const [userId, setUserId] = useState(null);
+
     const [passwordsMatch, setPasswordsMatch] = useState(true);
     const navigate = useNavigate();
     const [activeSection, setActiveSection] = useState("userInfo");
     const [orders, setOrders] = useState([]);
     useEffect(() => {
-        const urlParams = new URLSearchParams(window.location.search);
-        const id = urlParams.get("userId")
-        if (id) {
-            setUserId(id);
-            console.log(id);
-            fetchUserDetails(id);
-        }
+
         const fetchOrders = async () => {
             try {
                 const response = await axios.get('http://127.0.0.1:5000/orders/getOrders', { withCredentials: true });
@@ -48,17 +42,19 @@ export default function ProfilePage() {
             }
         };
         fetchOrders();
+        const fetchUserDetails = async () => {
+            try {
+                const response = await axios.get("http://127.0.0.1:5000/users/getUserProfile",{ withCredentials: true });
+                console.log("user data" + response.data);
+                setUser(response.data);
+            }  catch (error) {
+                console.log("error gettin user data" + error);
+            }
+        };
+        fetchUserDetails();
     }, []);
 
-    const fetchUserDetails = async (id) => {
-      try {
-          const response = await axios.get(`http://127.0.0.1:5000/users/getUserProfile/${id}`);
-          console.log("user data" + response.data);
-          setUser(response.data);
-      }  catch (error) {
 
-      }
-    };
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setUser((prevProduct) => ({
@@ -83,8 +79,8 @@ export default function ProfilePage() {
             mesto: user.mesto,
         };
         try {
-            await axios.put(`http://127.0.0.1:5000/users/updateUserProfile/${userId}`, updatedUser);
-            fetchUserDetails(userId);
+            await axios.put("http://127.0.0.1:5000/users/updateUserProfile", updatedUser,{ withCredentials: true });
+
         } catch (error) {
             console.log("nepodarilo sa zmenit udaje" + error);
         }
@@ -100,7 +96,7 @@ export default function ProfilePage() {
             return;
         }
         try {
-            await axios.put(`http://127.0.0.1:5000/users/updateUserPassword/${userId}`, { newPassword, confirmPassword,oldPassworcd  });
+            await axios.put(`http://127.0.0.1:5000/users/updateUserPassword`, { newPassword, confirmPassword,oldPassworcd  },{withCredentials:true});
 
         } catch (error) {
             console.error("Failed to change password: ", error);
@@ -172,7 +168,6 @@ export default function ProfilePage() {
                                 <label htmlFor="newPassword">Nové heslo</label>
                                 <input type="password" className="form-control" id="newPassword" />
                             </div>
-
                             <div className="form-group">
                                 <label htmlFor="newPassword">Nové heslo znova</label>
                                 <input type="password" className="form-control" id="confirmPassword" />

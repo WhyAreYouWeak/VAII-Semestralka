@@ -4,8 +4,8 @@ const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const {hash} = require("bcrypt");
 
-router.get('/getUserProfile/:id', async (req, res ) => {
-    const userId = req.params.id;
+router.get('/getUserProfile', async (req, res ) => {
+    const userId = req.user;
     console.log("Get user profile id je " + userId);
     const user = await  User.findById(userId);
     console.log("Get user profile user je " + user.email);
@@ -15,9 +15,9 @@ router.get('/getUserProfile/:id', async (req, res ) => {
     res.status(200).json(user);
 });
 
-router.put('/updateUserProfile/:id', async (req, res) => {
+router.put("/updateUserProfile", async (req, res) => {
     try {
-        const userId = req.params.id;
+        const userId = req.user._id;
         console.log("Update user profile id je " + userId);
 
         const updatedUser = {
