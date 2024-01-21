@@ -4,7 +4,8 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 export default function NavBar() {
     const [userEmail, setUserEmail] = useState('');
-    const [userId, setUserId] = useState('');
+    const [userRole, setUserRole] = useState('');
+
     useEffect(() => {
         const fetchUserEmail = async () => {
             try {
@@ -15,17 +16,19 @@ export default function NavBar() {
                 console.error('Error fetching user email:', error);
             }
         };
-        const fetUserId = async () => {
-          try {
-              const response = await axios.get('http://127.0.0.1:5000/getUserId', {withCredentials:true});
-              setUserId(response.data.id);
-          }  catch (error) {
-              console.error('Error fetching user id', error);
-          }
+        const fetchUserRole = async () => {
+            try {
+                const response = await axios.get('http://127.0.0.1:5000/getUserRole',{withCredentials:true}); // Replace with your actual API endpoint
+                setUserRole(response.data.role);
+            } catch (error) {
+
+                console.error('Error fetching user email:', error);
+            }
         };
 
         fetchUserEmail();
-        fetUserId();
+        fetchUserRole();
+
     }, []);
     return <nav className="navbar navbar navbar-expand-lg lg-body-tertiary navbar-fixed-top bg-dark">
         <div className="container-fluid">
@@ -51,10 +54,21 @@ export default function NavBar() {
                         <a className="nav-link" href="#"> Novinky</a>
                     </li>
                     <li className="nav-item" >
-                        {userEmail ?
-                            <Link to={"/profile"} > <a className="nav-link" > {userEmail}</a> </Link>
-                            : <Link to="/sign-register" > <a className="nav-link" > Prihlasenie </a> </Link>
-                        }
+                        {userRole === "admin" ? (
+                        <Link to="/profile">
+                            <a className="nav-link">Admin</a>
+                        </Link>
+                        ) : (
+                        userEmail ? (
+                        <Link to="/profile">
+                            <a className="nav-link">{userEmail}</a>
+                        </Link>
+                        ) : (
+                        <Link to="/sign-register">
+                            <a className="nav-link">Prihlasenie</a>
+                        </Link>
+                        )
+                        )}
                     </li>
                 </ul>
             </div>

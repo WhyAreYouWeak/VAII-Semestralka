@@ -37,6 +37,9 @@ app.get('/getUserEmail', ensureAuthenticated ,(req, res) => {
    //console.log("Je autentifikovany" + req.user);
    res.json({ email: req.user.email });
 });
+app.get('/getUserRole', ensureAuthenticated ,(req, res) => {
+    res.json({ role: req.user.role});
+});
 
 app.get('/getUserId', ensureAuthenticated, (req, res) => {
     //console.log("Get user id je " + req.user._id);
@@ -50,7 +53,7 @@ const reviews = require('./routes/reviews');
 const users = require('./routes/users');
 const orders = require('./routes/orders');
 app.use('/loginRegister',loginRegister);
-app.use('/adminPage',   adminPage);
+app.use('/adminPage',  adminPage);
 app.use('/products', productsPage);
 app.use('/reviews', reviews);
 app.use('/users',  users);

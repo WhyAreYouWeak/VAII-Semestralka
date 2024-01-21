@@ -4,7 +4,9 @@ import "./style/HomePage.css";
 import "./style/AdminPage.css";
 import Axios from "axios";
 import {Link} from "react-router-dom";
+import axios from "axios";
 export default function AdminPage() {
+    const [userRole, setUserRole] = useState('');
     const [products, setProducts] = useState([]);
     useEffect(() => {
         async function getProducts() {
@@ -15,9 +17,21 @@ export default function AdminPage() {
                 console.error("Produkt sa nepodarilo ziskat:", error);
             }
         }
+        const fetchUserRole = async () => {
+            try {
+                const response = await axios.get('http://127.0.0.1:5000/getUserRole',{withCredentials:true}); // Replace with your actual API endpoint
+                setUserRole(response.data.role);
+            } catch (error) {
+
+                console.error('Error fetching user email:', error);
+            }
+        };
+
         getProducts();
+        fetchUserRole();
     }, []);
-    return (
+
+    if (userRole === "admin")  return (
         <body>
 
         <div className="container-md position-relative">

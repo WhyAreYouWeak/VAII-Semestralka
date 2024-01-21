@@ -27,10 +27,10 @@ export default function ProfilePage() {
     });
 
 
-    const [passwordsMatch, setPasswordsMatch] = useState(true);
     const navigate = useNavigate();
     const [activeSection, setActiveSection] = useState("userInfo");
     const [orders, setOrders] = useState([]);
+    const [userRole, setUserRole] = useState('');
     useEffect(() => {
 
         const fetchOrders = async () => {
@@ -51,6 +51,16 @@ export default function ProfilePage() {
                 console.log("error gettin user data" + error);
             }
         };
+        const fetchUserRole = async () => {
+            try {
+                const response = await axios.get('http://127.0.0.1:5000/getUserRole',{withCredentials:true}); // Replace with your actual API endpoint
+                setUserRole(response.data.role);
+            } catch (error) {
+
+                console.error('Error fetching user email:', error);
+            }
+        };
+        fetchUserRole()
         fetchUserDetails();
     }, []);
 
@@ -92,7 +102,6 @@ export default function ProfilePage() {
         const newPassword = event.target.elements.newPassword.value;
         const confirmPassword = event.target.elements.confirmPassword.value;
         if (newPassword !== confirmPassword) {
-            setPasswordsMatch(false);
             return;
         }
         try {
@@ -146,6 +155,13 @@ export default function ProfilePage() {
                                     Objednávky
                                 </button>
                             </li>
+                            {userRole === 'admin' && (
+                                <Link to="/admin-page">
+                                    <button className={`btn btn-dark ${activeSection === "orders" ? "active" : ""}`} onClick={() => handleSectionChange("orders")}>
+                                        Admin page
+                                    </button>
+                                </Link>
+                            )}
                         </ul>
                     </div>
                 </div>

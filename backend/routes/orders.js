@@ -20,7 +20,13 @@ router.post('/createOrder/:id', async (req, res) => {
 router.get('/getOrders', async (req, res) => {
     const userId = req.user;
     try {
-        const orders = await Order.find({ user: userId }).populate('productId');
+        let orders
+        if (userId.role === "admin") {
+             orders = await Order.find().populate('productId');
+        } else {
+             orders = await Order.find({ user: userId }).populate('productId');
+        }
+
         res.status(200).json(orders);
     } catch (error) {
         res.status(500).json({ message: 'Internal Server Error' });
