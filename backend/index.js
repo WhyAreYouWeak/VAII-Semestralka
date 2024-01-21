@@ -52,11 +52,11 @@ const reviews = require('./routes/reviews');
 const users = require('./routes/users');
 const orders = require('./routes/orders');
 app.use('/loginRegister',loginRegister);
-app.use('/adminPage', adminPage);
+app.use('/adminPage', ensureAuthenticated ,  adminPage);
 app.use('/products', productsPage);
 app.use('/reviews', reviews);
-app.use('/users', users);
-app.use('/orders',  orders);
+app.use('/users', ensureAuthenticated, users);
+app.use('/orders',ensureAuthenticated,  orders);
 app.get('/', (req, res) => {
     console.log(req.isAuthenticated());
 })

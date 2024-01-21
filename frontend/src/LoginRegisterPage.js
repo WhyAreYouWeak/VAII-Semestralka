@@ -69,7 +69,6 @@ export default function LoginRegisterPage() {
     const handleInputChange = (e, setStateFunction) => {
         setStateFunction(e.target.value);
     };
-
     return <body>
     <div className="container-md">
             <div className="row">
