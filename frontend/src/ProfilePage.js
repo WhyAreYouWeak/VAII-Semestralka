@@ -32,11 +32,11 @@ export default function ProfilePage() {
         if (id) {
             setUserId(id);
             console.log(id);
-            fetUserDetails(id);
+            fetchUserDetails(id);
         }
     }, []);
 
-    const fetUserDetails = async (id) => {
+    const fetchUserDetails = async (id) => {
       try {
           const response = await axios.get(`http://127.0.0.1:5000/users/getUserProfile/${id}`);
           console.log("user data" + response.data);
@@ -45,7 +45,34 @@ export default function ProfilePage() {
 
       }
     };
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setUser((prevProduct) => ({
+            ...prevProduct,
+            [name]: value,
 
+        }));
+    };
+
+    const handleFakturacneUdajeChange = async (event) => {
+        event.preventDefault();
+
+        // Extract the updated user information from the form
+        const updatedUser = {
+            meno: user.meno,
+            priezvisko: user.priezvisko,
+            cislo: user.cislo,
+            ulica: user.ulica,
+            psc: user.psc,
+            mesto: user.mesto,
+        };
+        try {
+            await axios.put(`http://127.0.0.1:5000/users/updateUserProfile/${userId}`, updatedUser);
+            fetchUserDetails(userId);
+        } catch (error) {
+            console.log("nepodarilo sa zmenit udaje" + error);
+        }
+    };
     return <body>
     <div className="container">
         <div className="row">
@@ -94,31 +121,30 @@ export default function ProfilePage() {
                 <div className="card">
                     <div className="card-body">
                         <h4 className="card-title"> Fakturačné údaje</h4>
-                        <form>
+                        <form onSubmit={handleFakturacneUdajeChange}>
                             <div className="form-group">
                                 <label htmlFor="userName">Meno</label>
-                                <input type="text" className="form-control" value={user.meno} id="userName"/>
+                                <input type="text" className="form-control" value={user.meno} onChange={handleInputChange} id="meno" name="meno" required/>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="userName">Priezvisko</label>
-                                <input type="text" className="form-control" value={user.priezvisko} id="userSurname"/>
+                                <input type="text" className="form-control" value={user.priezvisko} onChange={handleInputChange} id="priezvisko" name="priezvisko" required/>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="phoneNumber">Tel. čislo (+421 888 225)</label>
-                                <input type="tel" pattern="[+]{1}[0-9]{3} [0-9]{3} [0-9]{3}" value={user.cislo} className="form-control"
-                                       id="phoneNumber"/>
+                                <input type="tel" pattern="[+]{1}[0-9]{3} [0-9]{3} [0-9]{3}" value={user.cislo} onChange={handleInputChange} className="form-control" id="phoneNumber" name="cislo" required/>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="street">Ulica</label>
-                                <input type="text" className="form-control" value={user.ulica}  id="street"/>
+                                <input type="text" className="form-control" value={user.ulica} onChange={handleInputChange}  id="street" name="ulica" required/>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="PSC">PSČ</label>
-                                <input type="text" className="form-control" value={user.psc} id="PSC"/>
+                                <input type="text" className="form-control" value={user.psc} onChange={handleInputChange} id="PSC" name="psc" required />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="city">Mesto</label>
-                                <input type="text" className="form-control" value={user.mesto} id="city"/>
+                                <input type="text" className="form-control" value={user.mesto} onChange={handleInputChange} id="city" name="mesto" required/>
                             </div>
                             <button type="submit" className="userInformationButton btn btn-primary">Zmeniť údaje</button>
                         </form>
@@ -128,5 +154,4 @@ export default function ProfilePage() {
         </div>
     </div>
     </body>
-
 }
