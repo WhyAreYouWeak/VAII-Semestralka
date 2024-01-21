@@ -1,5 +1,7 @@
 const express = require('express');
 const User = require("../models/User");
+const Review = require("../models/Review");
+const Order = require("../models/Order");
 const passport = require('passport');
 const router = express.Router();
 const bcrypt = require('bcrypt');
@@ -60,6 +62,9 @@ router.post('/logout', (req, res, next) => {
 
 router.post('/delete', async (req, res, next) => {
     console.log(" Delete " + req.user);
+    const user = req.user;
+    await Review.deleteMany({user: user});
+    await Order.deleteMany({user: user});
     await User.findByIdAndDelete(req.user);
     req.logout((error) => {
         if (error) {
