@@ -7,18 +7,28 @@ export default function NavBar() {
         axios.post('http://127.0.0.1:5000/loginRegister/logout',{},{withCredentials:true}).then(r => window.location.reload()).catch();
     };
     const [userEmail, setUserEmail] = useState('');
+    const [userId, setUserId] = useState('');
     useEffect(() => {
         const fetchUserEmail = async () => {
             try {
                 const response = await axios.get('http://127.0.0.1:5000/getUserEmail',{withCredentials:true}); // Replace with your actual API endpoint
                 setUserEmail(response.data.email);
             } catch (error) {
-                // Handle errors
+
                 console.error('Error fetching user email:', error);
             }
         };
+        const fetUserId = async () => {
+          try {
+              const response = await axios.get('http://127.0.0.1:5000/getUserId', {withCredentials:true});
+              setUserId(response.data.id);
+          }  catch (error) {
+              console.error('Error fetching user id', error);
+          }
+        };
 
         fetchUserEmail();
+        fetUserId();
     }, []);
     return <nav className="navbar navbar navbar-expand-lg lg-body-tertiary navbar-fixed-top bg-dark">
         <div className="container-fluid">
@@ -44,7 +54,10 @@ export default function NavBar() {
                         <a className="nav-link" href="#"> Novinky</a>
                     </li>
                     <li className="nav-item" >
-                        <Link to="/sign-register" > <a className="nav-link" > {userEmail ? userEmail : "Prihlasenie"}</a> </Link>
+                        {userEmail ?
+                            <Link to={`/profile?userId=${userId}`} > <a className="nav-link" > {userEmail}</a> </Link>
+                            : <Link to="/sign-register" > <a className="nav-link" > Prihlasenie </a> </Link>
+                        }
                     </li>
                     {userEmail &&
                     <li className="nav-item">

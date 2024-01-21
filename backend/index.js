@@ -40,14 +40,21 @@ app.get('/getUserEmail', ensureAuthenticated ,(req, res) => {
    res.json({ email: req.user.email });
 });
 
+app.get('/getUserId', ensureAuthenticated, (req, res) => {
+    console.log("Get user id je " + req.user._id);
+    res.json({ id: req.user._id});
+});
+
 const loginRegister = require('./routes/loginRegister');
 const adminPage = require('./routes/adminPage');
 const productsPage = require('./routes/productsPage');
 const reviews = require('./routes/reviews');
+const users = require('./routes/users');
 app.use('/loginRegister',loginRegister);
 app.use('/adminPage', adminPage);
 app.use('/products', productsPage);
 app.use('/reviews', reviews);
+app.use('/users', users);
 app.get('/', (req, res) => {
     console.log(req.isAuthenticated());
 })
