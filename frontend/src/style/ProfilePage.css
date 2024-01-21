@@ -15,3 +15,14 @@
 .col-md-8 {
     margin-left: 10% !important;
 }
+
+.profileRow {
+    padding-left: 0% !important;
+}
+
+.profileCol {
+    width: 50% !important;
+}
+.userMenu {
+    padding-left: 3% !important;
+}

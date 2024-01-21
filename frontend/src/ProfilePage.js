@@ -97,11 +97,11 @@ export default function ProfilePage() {
 
     return <body>
     <div className="container">
-        <div className="row">
-            <div className="menuContainer col-md-auto">
+        <div className="profileRow row">
+            <div className="menuContainer userMenu col-md-auto">
                 <div className="d-flex justify-content-between">
-                    <div className="left-menu container --bs-secondary-bg-rgb ">
-                        <h3 className="menuTitle">Kategórie</h3>
+                    <div className="left-menu container userMenu --bs-secondary-bg-rgb ">
+                        <h3 className="menuTitle"></h3>
                         <ul>
                             <li>
                                 <button className="btn btn-dark "> Základné informácie</button>
@@ -113,7 +113,7 @@ export default function ProfilePage() {
                     </div>
                 </div>
             </div>
-            <div className="col-md-8">
+            <div className="profileCol col-md-8">
                 <div className="card">
                     <div className="card-body">
                         <h4 className="card-title">Prihlasovacie informácie</h4>
