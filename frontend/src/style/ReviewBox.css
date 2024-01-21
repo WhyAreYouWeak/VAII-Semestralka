@@ -1,0 +1,12 @@
+.card {
+    border: 1px solid black !important;
+}
+
+.spacer {
+    margin-bottom: 2%;
+}
+
+.card-header {
+    color: black;
+    font-weight: bold;
+}

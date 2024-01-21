@@ -24,6 +24,7 @@ export default function AddProduct() {
     const [categories, setCategories] = useState([]);
     const [productId, setProductId] = useState(null);
     const navigate = useNavigate();
+
     useEffect(() => {
 
         const urlParams = new URLSearchParams(window.location.search);
@@ -35,6 +36,7 @@ export default function AddProduct() {
             fetchProductDetails(id);
         }
         fetchCategories();
+
     }, []);
 
     const fetchProductDetails = async (id) => {
@@ -43,10 +45,12 @@ export default function AddProduct() {
                 `http://127.0.0.1:5000/adminPage/products/${id}`
             );
             setProduct(response.data);
+            console.log("kategoria " + response.data.category);
         } catch (error) {
             console.error("Error fetching product details:", error);
         }
     };
+
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -128,8 +132,7 @@ export default function AddProduct() {
             console.error('Error fetching categories:', error);
         }
     };
-    const foundCategory = categories.find(category => category._id === product.category);
-    console.log("najdena kategoria " + (foundCategory ? foundCategory.name : "Category not found"));
+
 
     return <body>
 
@@ -158,7 +161,7 @@ export default function AddProduct() {
                             className="form-select"
                             id="category"
                             name="category"
-                            value={foundCategory ? foundCategory.name : ''}
+                            value={product.category.name}
                             onChange={handleInputChange}
                         >
                             <option value="" disabled>
@@ -205,7 +208,7 @@ export default function AddProduct() {
                     </div>
                     <div className="mb-3">
                         <label htmlFor="publisher" className="form-label">O knihe:</label>
-                        <input type="text" className="form-control" id="about" name="about" value={product.about} onChange={handleInputChange} required />
+                        <input type="text" className="form-control" id="about" name="about" value={product.about} onChange={handleInputChange}  />
                     </div>
                     <div className="mb-3">
                         <label htmlFor="imageURL" className="form-label">Obrazok:</label>

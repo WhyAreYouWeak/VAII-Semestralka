@@ -143,7 +143,8 @@ router.get('/products', async function(req, res) {
 router.get('/products/:id', async function (req, res) {
     try {
         const productId = req.params.id;
-        const product = await Item.findById(productId);
+        const product = await Item.findById(productId).populate("category");
+        //console.log("kategoria " + product);
         res.status(200).json(product);
     } catch (err) {
         console.error(err);

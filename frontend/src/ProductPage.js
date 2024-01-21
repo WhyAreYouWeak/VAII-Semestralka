@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import {useParams} from 'react-router-dom';
 import "./style/ProductsPage.css"
+import ItemTile from "./components/ItemTile";
+import ReviewBox from "./components/ReviewBox";
 
 export default function ProductDetail() {
 
@@ -48,8 +50,9 @@ export default function ProductDetail() {
             try {
                 const response = await axios.get(`http://127.0.0.1:5000/adminPage/products/${id}`);
                 setProduct(response.data);
-                const reviewsResponse = await axios.get(`http://127.0.0.1:5000/reviews?productId=${id}`);
+                const reviewsResponse = await axios.get(`http://127.0.0.1:5000/reviews/getReviews/${id}`);
                 setReviews(reviewsResponse.data);
+                console.log("reviews" + reviewsResponse.data);
             } catch (error) {
                 console.error('Error fetching product details and reviews:', error);
             }
@@ -75,7 +78,7 @@ export default function ProductDetail() {
             console.error('Error adding a review:', error);
         }
     };
-
+    if (product.name === '') return null;
     return (
         <div>
         <div className="container-md position-relative ">
@@ -89,7 +92,7 @@ export default function ProductDetail() {
                     </div>
                     <div className="itemDescriptionCol col-md-7">
                         <p><b>Autor:</b> {product.author}</p>
-                        <p><b>Kategoria:</b> {product.category}</p>
+                        <p><b>Kategoria:</b> {product.category.name}</p>
                         <p><b>ISBN:</b> {product.ISBN}</p>
                         <p><b>Väzba:</b> {product.binding}</p>
                         <p><b>Váha:</b> {product.weight} kg</p>
@@ -101,7 +104,7 @@ export default function ProductDetail() {
                 </div>
                 <div className="reviewsContainer mt-md-4 ">
                     <h3 className="userReviewTitle">Viac o knihe</h3>
-                    <p>
+                    <p className="aboutBook">
                         {product.about}
                     </p>
                 </div>
@@ -133,14 +136,16 @@ export default function ProductDetail() {
                             <button type="submit" className="reviewSubmitButton btn btn-primary">Pridať recenziu</button>
                         </form>
                     }
-                    <ul className="reviews">
                         {reviews.map((review) => (
-                            <li key={review._id}>{review.text}</li>
+                            <ReviewBox
+                                text={review.text}
+                                user={review.user.email}
+                                type={review.type}
+                            ></ReviewBox>
                         ))}
-                    </ul>
                 </div>
             </div>
         </div>
     </div>
     );
-};
+}

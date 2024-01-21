@@ -40,6 +40,7 @@
 
 .menuContainer {
     padding-top: 5%;
+    z-index: 999;
 }
 
 .allProductsButton {
@@ -82,4 +83,9 @@
 
 .reviews {
     margin-bottom: 0 !important;
+}
+
+.aboutBook {
+    width: 100%;
+    font-size: large;
 }
