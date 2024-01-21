@@ -5,7 +5,9 @@ import "./style/AdminPage.css";
 import Axios from "axios";
 import {Link} from "react-router-dom";
 import axios from "axios";
+import  { useNavigate  }  from 'react-router-dom';
 export default function AdminPage() {
+    const navigate = useNavigate();
     const [userRole, setUserRole] = useState('');
     const [products, setProducts] = useState([]);
     useEffect(() => {
@@ -31,27 +33,32 @@ export default function AdminPage() {
         fetchUserRole();
     }, []);
 
-    if (userRole === "admin")  return (
-        <body>
+    if (userRole === "admin"){
+        return (
+            <body>
 
-        <div className="container-md position-relative">
-            <Link to="/add-product">
-            <div className="addButton position-absolute top-0 end-0">
-                <button className="btn btn-primary me-2">Pridat produkt</button>
+            <div className="container-md position-relative">
+                <Link to="/add-product">
+                    <div className="addButton position-absolute top-0 end-0">
+                        <button className="btn btn-primary me-2">Pridat produkt</button>
+                    </div>
+                </Link>
+                <div className="products container d-flex flex-wrap justify-content-center">
+                    {products.map((product) => (
+                        <Link to={`/add-product?productId=${product._id}`} key={product._id}>
+                            <ItemTile
+                                title={product.name}
+                                price={product.price}
+                                imageURL={product.imageURL}
+                            ></ItemTile>
+                        </Link>
+                    ))}
+                </div>
             </div>
-            </Link>
-            <div className="products container d-flex flex-wrap justify-content-center">
-                {products.map((product) => (
-                    <Link to={`/add-product?productId=${product._id}`} key={product._id}>
-                        <ItemTile
-                            title={product.name}
-                            price={product.price}
-                            imageURL={product.imageURL}
-                        ></ItemTile>
-                    </Link>
-                ))}
-            </div>
-        </div>
-        </body>
-    );
+            </body>
+        );
+    }  else {
+        navigate("/");
+        return null;
+    }
 }

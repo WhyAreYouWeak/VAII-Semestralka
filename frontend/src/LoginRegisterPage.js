@@ -7,7 +7,7 @@ export default function LoginRegisterPage() {
     const navigate = useNavigate();
     const [loginEmail, setLoginEmail] = useState('');
     const [loginPassword, setLoginPassword] = useState('');
-
+    const [userEmail, setUserEmail] = useState('');
     const [registerEmail, setRegisterEmail] = useState('');
     const [registerPassword, setRegisterPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -19,6 +19,22 @@ export default function LoginRegisterPage() {
         }
         return validator.isEmail(email);
     };
+
+    useEffect(() => {
+        const fetchUserEmail = async () => {
+            try {
+                const response = await axios.get('http://127.0.0.1:5000/getUserEmail',{withCredentials:true}); // Replace with your actual API endpoint
+                setUserEmail(response.data.email);
+            } catch (error) {
+
+                console.error('Error fetching user email:', error);
+            }
+        };
+        fetchUserEmail();
+
+    }, []);
+
+
 
     const handleRegisterSubmit = (event) => {
         event.preventDefault();
@@ -68,6 +84,10 @@ export default function LoginRegisterPage() {
     const handleInputChange = (e, setStateFunction) => {
         setStateFunction(e.target.value);
     };
+    if (userEmail){
+        navigate("/profile");
+        return null
+    }
     return <body>
     <div className="container-md">
             <div className="row">

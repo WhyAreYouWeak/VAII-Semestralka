@@ -43,9 +43,9 @@ router.put("/updateUserProfile", async (req, res) => {
     }
 });
 
-router.put('/updateUserPassword/:id', async (req, res) => {
+router.put('/updateUserPassword', async (req, res) => {
     try {
-        const userId = req.params.id;
+        const userId = req.user;
         console.log("Update user password id je " + userId);
 
         // Ensure the new password is provided
