@@ -41,6 +41,7 @@
 .menuContainer {
     padding-top: 5%;
     z-index: 999;
+    padding-bottom: 32%;
 }
 
 .allProductsButton {
@@ -88,4 +89,8 @@
 .aboutBook {
     width: 100%;
     font-size: large;
+}
+
+.orderDetailRow {
+    padding-bottom: 20% !important;
 }

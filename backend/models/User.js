@@ -31,6 +31,11 @@ const userSchema = new mongoose.Schema({
     cislo: {
         type: String,
     },
+    role: {
+        type: String,
+        enum: ['admin', 'customer'],
+        default: 'customer',
+    },
 
 },{timestamps: true});
 

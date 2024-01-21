@@ -228,15 +228,17 @@ export default function ProfilePage() {
                 <div className="card">
                     <div className="card-body ">
                     <h4 className="card-title">Objednávky</h4>
-                        <ul>
+
                             {orders.map((order) => (
                                 <Link to={`/order?orderId=${order._id}`} >
-                                <li key={order._id}>
-                                    Product ID: {order.productId.name}
-                                </li>
+                                    <div className="orderCard card">
+                                        <div className="card-body">
+                                            {order.productId.name} {order.productId.price}€
+                                        </div>
+                                    </div>
                                 </Link>
                             ))}
-                        </ul>
+
                     </div>
                 </div>
                 </div>

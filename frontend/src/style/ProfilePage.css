@@ -26,3 +26,11 @@
 .userMenu {
     padding-left: 3% !important;
 }
+
+.orderCard {
+    color: white;
+    font-weight: bold;
+    font-size: larger;
+    padding-left: 1%;
+    margin-top: 2%;
+}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import "./style/ProductsPage.css"; // Import your previous styles
+import "./style/ProductsPage.css";
+import {Link} from "react-router-dom"; // Import your previous styles
 
 export default function OrderPage() {
     const [order, setOrder] = useState({});
@@ -31,17 +32,21 @@ export default function OrderPage() {
                 <div className="title">
                     <h2>Detail objednávky</h2>
                 </div>
-                <div className="row">
+                <div className="orderDetailRow row">
                     <div className="col-md-auto">
+                        <Link to={`/product?productId=${order.productId._id}`}>
                         <img src={order.productId.imageURL} alt="{order.productId.imageURL}" className="img-fluid" />
+                        </Link>
                     </div>
                     <div className="itemDescriptionCol col-md-7">
-                        <p><b>Kniha:</b> {order.productId.name}</p>
-
-                        <p className="mt-3"><b>Objednal :</b>{order.user.meno} {order.user.priezvisko}  </p>
-                        <p><b>Email:</b>{order.user.email} </p>
-                        <p><b>Adresa:</b>{order.user.ulica} {order.user.mesto} {order.user.psc} </p>
-                        <p><b>Tel. čislo:</b>{order.user.cislo} </p>
+                        <Link to={`/product?productId=${order.productId._id}`}>
+                        <p className="text-decoration-none"><b>Kniha:</b> {order.productId.name} </p>
+                        </Link>
+                        <p><b>Cena</b> {order.productId.price}€ </p>
+                        <p className="mt-3"><b>Objednal: </b>{order.user.meno} {order.user.priezvisko}  </p>
+                        <p><b>Email: </b>{order.user.email} </p>
+                        <p><b>Adresa: </b>{order.user.ulica} {order.user.mesto} {order.user.psc} </p>
+                        <p><b>Tel. čislo: </b>{order.user.cislo} </p>
                     </div>
                 </div>
             </div>

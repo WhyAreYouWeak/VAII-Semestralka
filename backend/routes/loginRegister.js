@@ -15,7 +15,7 @@ router.post('/register', async function (req,res) {
       } else {
           const salt = await bcrypt.genSalt(10);
           const hashedPassword  = await bcrypt.hash(password, salt);
-          const user = new User({email , password: hashedPassword});
+          const user = new User({email , password: hashedPassword, role: "customer"});
           await user.save();
           res.status(201).send("Pouzivatel zaregistrovany");
       }
@@ -31,19 +31,19 @@ router.post('/register', async function (req,res) {
 
 router.post('/login', (req, res, next) => {
     passport.authenticate("local", async (err, user, info ) => {
-        if (err)
+        if (err) {
+            console.log("neplatny email alebo heslo2");
             return next(err);
-        else if (!user)
-            return res.status(400).send([ info.message ]);
+        }
+        else if (!user) {
+            return res.status(200).send([ info.message ]);
+        }
 
         req.logIn(user, (err) => {
             if (err)
                 return next(err);
 
-            return res.status(200).json({
-                id: user.id,
-                email: user.email,
-            });
+            return res.status(200).json("Prihlasenie prebehlo uspesne");
         });
     })(req, res, next);
 });

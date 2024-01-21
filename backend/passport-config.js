@@ -5,20 +5,18 @@ const bcrypt = require('bcrypt');
 const User = require('./models/User');
 
 passport.use(new LocalStrategy({ usernameField: 'email' }, async (email, password, done) => {
-    //console.log("pasport use bolo spustene");
     try {
         const user = await User.findOne({ email: email.toLowerCase() });
-       // console.log("email je " + email);
+
         if (!user) {
-          //  console.log("pozivatel neexistuje " + user);
-            return done(null, false, { message: 'Invalid email or password.' });
+          console.log("neplatny email alebo heslo");
+            return done(null, false, { message: 'Neplatny email alebo heslo' });
         }
 
         const isPasswordValid = await bcrypt.compare(password, user.password);
-       // console.log("email je " + email);
-       // console.log("isPassportValid" + isPasswordValid);
         if (!isPasswordValid) {
-            return done(null, false, { message: 'Invalid email or password.' });
+            console.log("neplatny email alebo heslo");
+            return done(null, false, { message: 'Neplatny email alebo heslo' });
         }
 
         return done(null, user);
@@ -28,7 +26,6 @@ passport.use(new LocalStrategy({ usernameField: 'email' }, async (email, passwor
 }));
 
 passport.serializeUser((user, done) => {
-   // console.log("serializeUser succes.")
     done(null, user.id);
 });
 

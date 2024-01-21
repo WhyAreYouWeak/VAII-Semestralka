@@ -50,6 +50,7 @@ export default function LoginRegisterPage() {
                 .post(url, { email: loginEmail, password: loginPassword },{withCredentials:true})
                 .then((response) => {
                     console.log("Prihlasenie uspesne", response.data);
+                    alert(response.data);
                     window.location.reload();
                 })
                 .catch((error) => {
